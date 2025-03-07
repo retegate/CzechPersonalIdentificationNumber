@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EB53C6F7-57FA-4DEE-8743-7D26D20B79EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{067E9E95-6A80-4065-B787-0D453B9902F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{DDA72FCA-859F-4060-BEF3-34BD97211DB3}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+		.gitignore = .gitignore
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retegate.Bogus.CzechPersonalIdentificationNumber", "src\Retegate.Bogus.CzechPersonalIdentificationNumber\Retegate.Bogus.CzechPersonalIdentificationNumber.csproj", "{8FE62DCC-C609-4E48-A085-520FB71DA7F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retegate.CzechPersonalIdentificationNumber", "src\Retegate.CzechPersonalIdentificationNumber\Retegate.CzechPersonalIdentificationNumber.csproj", "{6F3FB1E6-E477-4121-A94D-6A2F5C485D53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator", "src\Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator\Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.csproj", "{5784ECC1-8993-468D-A5F1-DF29F9255A16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retegate.CzechPersonalIdentifiationNumber.Tests", "tests\Retegate.CzechPersonalIdentifiationNumber.Tests\Retegate.CzechPersonalIdentifiationNumber.Tests.csproj", "{C6B1A008-B210-4A59-A903-253B7BC79375}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FE62DCC-C609-4E48-A085-520FB71DA7F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FE62DCC-C609-4E48-A085-520FB71DA7F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FE62DCC-C609-4E48-A085-520FB71DA7F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FE62DCC-C609-4E48-A085-520FB71DA7F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F3FB1E6-E477-4121-A94D-6A2F5C485D53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F3FB1E6-E477-4121-A94D-6A2F5C485D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F3FB1E6-E477-4121-A94D-6A2F5C485D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F3FB1E6-E477-4121-A94D-6A2F5C485D53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5784ECC1-8993-468D-A5F1-DF29F9255A16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5784ECC1-8993-468D-A5F1-DF29F9255A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5784ECC1-8993-468D-A5F1-DF29F9255A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5784ECC1-8993-468D-A5F1-DF29F9255A16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6B1A008-B210-4A59-A903-253B7BC79375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6B1A008-B210-4A59-A903-253B7BC79375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6B1A008-B210-4A59-A903-253B7BC79375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6B1A008-B210-4A59-A903-253B7BC79375}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8FE62DCC-C609-4E48-A085-520FB71DA7F5} = {EB53C6F7-57FA-4DEE-8743-7D26D20B79EB}
+		{6F3FB1E6-E477-4121-A94D-6A2F5C485D53} = {EB53C6F7-57FA-4DEE-8743-7D26D20B79EB}
+		{5784ECC1-8993-468D-A5F1-DF29F9255A16} = {EB53C6F7-57FA-4DEE-8743-7D26D20B79EB}
+		{C6B1A008-B210-4A59-A903-253B7BC79375} = {067E9E95-6A80-4065-B787-0D453B9902F2}
+	EndGlobalSection
+EndGlobal
