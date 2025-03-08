@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator\Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.csproj" />
+    </ItemGroup>
+
+</Project>
