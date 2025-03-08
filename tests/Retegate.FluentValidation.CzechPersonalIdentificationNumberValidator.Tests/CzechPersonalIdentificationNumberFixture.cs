@@ -1,6 +1,6 @@
-using PavelKudrna.Demo.Validation.PersonalIdentificationNumber;
+using Retegate.CzechPersonalIdentificationNumber;
 
-namespace PavelKudrna.Demo.Validation.Tests.Validators.PersonalIdentificationNumber;
+namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests;
 
 public static class CzechPersonalIdentificationNumberFixture
 {

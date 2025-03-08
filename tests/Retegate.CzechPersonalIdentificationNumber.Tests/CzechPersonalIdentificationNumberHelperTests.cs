@@ -1,6 +1,4 @@
-﻿using PavelKudrna.Demo.Validation.PersonalIdentificationNumber;
-
-namespace PavelKudrna.Demo.Validation.Tests.Validators.PersonalIdentificationNumber;
+﻿namespace Retegate.CzechPersonalIdentifiationNumber.Parser.Tests;
 
 public class CzechPersonalIdentificationNumberHelperTests
 {

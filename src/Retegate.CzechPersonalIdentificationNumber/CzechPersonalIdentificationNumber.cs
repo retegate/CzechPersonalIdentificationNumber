@@ -7,17 +7,24 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
 {
     private const string Pattern = @"^\s*\d{6}\s?\/?\s?\d{3,4}\s*$";
 
-    public const ushort NineteenHundred = 1900;
-    public const ushort TwoThousand = 2000;
-    public const ushort NewNumberStyleStartYear = 1954;
-    public const ushort PopulationBoomStartYear = 1974;
-    public const ushort PopulationBoomEndYear = 1985;
-    public const ushort NewEraPopulationBoomStartYear = 2004;
-    public const byte WomenMonthOffset = 50;
-    public const byte MenMonthOffsetInPopulationBoom = 20;
-    public const byte WomenMonthOffsetInPopulationBoom = 70;
-    public const byte ModuloDivider = 11;
-    public const byte ModuloException = 10;
+    internal const ushort NineteenHundred = 1900;
+    internal const ushort TwoThousand = 2000;
+    internal const ushort NewNumberStyleStartYear = 1954;
+    internal const ushort PopulationBoomStartYear = 1974;
+    internal const ushort PopulationBoomEndYear = 1985;
+    internal const ushort NewEraPopulationBoomStartYear = 2004;
+    internal const byte WomenMonthOffset = 50;
+    internal const byte MenMonthOffsetInPopulationBoom = 20;
+    internal const byte WomenMonthOffsetInPopulationBoom = 70;
+    internal const byte ModuloDivider = 11;
+    internal const byte ModuloException = 10;
+
+    internal const string NullInputFormatMessage = "The personal identification number cannot be null.";
+    internal const string InvalidFormatMessage = "The personal identification number is not in the correct format YYMMDD(/)XXX(X).";
+    internal const string InvalidYearMessage = "The year part of the personal identification number is not in the correct format.";
+    internal const string InvalidMonthMessage = "The month part of the personal identification number is not in the correct format.";
+    internal const string InvalidDayMessage = "The day part of the personal identification number is not in the correct format (Such date of birth not exist).";
+    internal const string InvalidModuloMessage = "The personal identification number is not in the correct format (The modulo is not correct).";
 
     [GeneratedRegex(Pattern)]
     private static partial Regex ValidationRegex();
@@ -43,11 +50,16 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
 
     public static CzechPersonalIdentificationNumber Parse(string potentialPersonalIdentificationNumber, IFormatProvider? formatProvider = null)
     {
+        if (potentialPersonalIdentificationNumber is null)
+        {
+            throw new FormatException(NullInputFormatMessage);
+        }
+
         ArgumentNullException.ThrowIfNull(potentialPersonalIdentificationNumber);
 
         if (!ValidatePattern(potentialPersonalIdentificationNumber))
         {
-            throw new FormatException("The personal identification number is not in the correct format YYMMDD(/)XXX(X).");
+            throw new FormatException(InvalidFormatMessage);
         }
 
         potentialPersonalIdentificationNumber = potentialPersonalIdentificationNumber.Trim();
@@ -57,26 +69,25 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
         var year = int.Parse(potentialPersonalIdentificationNumber[..2]);
         if (!ValidateYear(ref year))
         {
-            throw new FormatException("The year part of the personal identification number is not in the correct format.");
+            throw new FormatException(InvalidYearMessage);
         }
 
         var month = int.Parse(potentialPersonalIdentificationNumber[2..4]);
         var sex = SexEnum.Male;
         if (!ValidateMonth(year, ref month, ref sex))
         {
-            throw new FormatException("The month part of the personal identification number is not in the correct format.");
+            throw new FormatException(InvalidMonthMessage);
         }
 
         var day = int.Parse(potentialPersonalIdentificationNumber[4..6]);
         if (!ValidateDay(year, month, day))
         {
-            throw new FormatException("The day part of the personal identification number is not in the correct format (Such date of birth not exist).");
+            throw new FormatException(InvalidDayMessage);
         }
 
-        // can be inverted but this is more readable and consistent with the rest of the checks
         if (!ValidateModulo(year, potentialPersonalIdentificationNumber))
         {
-            throw new FormatException("The personal identification number is not in the correct format (The modulo is not correct).");
+            throw new FormatException(InvalidModuloMessage);
         }
 
         return new CzechPersonalIdentificationNumber(potentialPersonalIdentificationNumber, new DateOnly(year, month, day), sex);
@@ -93,7 +104,6 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
             return false;
         }
 
-        //todo: testy
         try
         {
             result = Parse(potentialPersonalIdentificationNumber);
@@ -180,6 +190,4 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
 
         return lastDigit != ModuloException || personalIdentificationNumber.Last() == '0';
     }
-
-    
 }
