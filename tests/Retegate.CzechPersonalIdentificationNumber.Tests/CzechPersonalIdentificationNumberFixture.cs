@@ -1,4 +1,4 @@
-namespace Retegate.CzechPersonalIdentifiationNumber.Parser.Tests;
+namespace Retegate.CzechPersonalIdentificationNumber.Tests;
 
 public static class CzechPersonalIdentificationNumberFixture
 {

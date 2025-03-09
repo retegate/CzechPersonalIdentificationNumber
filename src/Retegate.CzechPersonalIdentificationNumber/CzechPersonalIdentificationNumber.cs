@@ -67,20 +67,21 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
         potentialPersonalIdentificationNumber = potentialPersonalIdentificationNumber.Replace(" ", string.Empty);
 
         var year = int.Parse(potentialPersonalIdentificationNumber[..2]);
-        if (!ValidateYear(ref year))
+        var validateShortYearResult = ValidateShortYear(year);
+        if (!validateShortYearResult.IsValid)
         {
             throw new FormatException(InvalidYearMessage);
         }
 
         var month = int.Parse(potentialPersonalIdentificationNumber[2..4]);
-        var sex = SexEnum.Male;
-        if (!ValidateMonth(year, ref month, ref sex))
+        var validateMonthResult = ValidateMonth(validateShortYearResult.Year!.Value, month);
+        if (!validateMonthResult.IsValid)
         {
             throw new FormatException(InvalidMonthMessage);
         }
 
         var day = int.Parse(potentialPersonalIdentificationNumber[4..6]);
-        if (!ValidateDay(year, month, day))
+        if (!ValidateDay(validateShortYearResult.Year.Value, month, day))
         {
             throw new FormatException(InvalidDayMessage);
         }
@@ -90,7 +91,7 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
             throw new FormatException(InvalidModuloMessage);
         }
 
-        return new CzechPersonalIdentificationNumber(potentialPersonalIdentificationNumber, new DateOnly(year, month, day), sex);
+        return new CzechPersonalIdentificationNumber(potentialPersonalIdentificationNumber, new DateOnly(year, validateMonthResult.Month!.Value, day), validateMonthResult.Sex!.Value);
     }
 
     public static bool TryParse(string potentialPersonalIdentificationNumber, [MaybeNullWhen(false)] out CzechPersonalIdentificationNumber result) =>
@@ -116,14 +117,29 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
         }
     }
 
-    internal static bool ValidateYear(ref int year)
+    internal sealed class ValidateShortYearResult
     {
-        year += (year > (DateTime.Now.Year - TwoThousand) ? NineteenHundred : TwoThousand);
-        return year >= NineteenHundred && year <= DateTime.Now.Year;
+        public int? Year { get; init; }
+        public required bool IsValid { get; init; }
     }
 
-    internal static bool ValidateMonth(int year, ref int month, ref SexEnum sex)
+    internal static ValidateShortYearResult ValidateShortYear(int year)
     {
+        year += (year > (DateTime.Now.Year - TwoThousand) ? NineteenHundred : TwoThousand);
+        var isValid = year >= NineteenHundred && year <= DateTime.Now.Year;
+        return new ValidateShortYearResult() { IsValid = isValid, Year = isValid ? year : null, };
+    }
+
+    internal sealed class ValidateMonthResult
+    {
+        public int? Month { get; init; }
+        public SexEnum? Sex { get; init; }
+        public required bool IsValid { get; init; }
+    }
+
+    internal static ValidateMonthResult ValidateMonth(int year, int month)
+    {
+        SexEnum sex;
         if (year >= NewEraPopulationBoomStartYear && month >= WomenMonthOffsetInPopulationBoom)
         {
             sex = SexEnum.Female;
@@ -144,7 +160,9 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
             sex = SexEnum.Male;
         }
 
-        return month is >= 1 and <= 12;
+        var isValid = month is >= 1 and <= 12;
+
+        return new ValidateMonthResult() { IsValid = isValid, Month = isValid ? month : null, Sex = isValid ? sex : null };
     }
 
     internal static bool ValidateDay(int year, int month, int day)
