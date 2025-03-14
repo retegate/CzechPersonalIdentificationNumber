@@ -18,9 +18,12 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
     internal const byte WomenMonthOffsetInPopulationBoom = 70;
     internal const byte ModuloDivider = 11;
     internal const byte ModuloException = 10;
+    internal const byte MonthsInYear = 12;
+    internal const byte PersonalIdentificationNumberLengthAfterOldFormat = 10;
+    internal const char ControlNumberOptionalSeparator = '/';
 
     internal const string NullInputFormatMessage = "The personal identification number cannot be null.";
-    internal const string InvalidFormatMessage = "The personal identification number is not in the correct format YYMMDD(/)XXX(X).";
+    internal static readonly string InvalidFormatMessage = $"The personal identification number is not in the correct format YYMMDD({ControlNumberOptionalSeparator})XXX(X).";
     internal const string InvalidYearMessage = "The year part of the personal identification number is not in the correct format.";
     internal const string InvalidMonthMessage = "The month part of the personal identification number is not in the correct format.";
     internal const string InvalidDayMessage = "The day part of the personal identification number is not in the correct format (Such date of birth not exist).";
@@ -46,7 +49,7 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
 
     public SexEnum Sex { get; }
 
-    public string CzechNormalizedPersonalIdentificationNumberFormattedWithSlash => $"{NormalizedCzechNormalizedPersonalIdentificationNumber[..6]}/{NormalizedCzechNormalizedPersonalIdentificationNumber[6..]}";
+    public string CzechNormalizedPersonalIdentificationNumberFormattedWithSlash => $"{NormalizedCzechNormalizedPersonalIdentificationNumber[..6]}{ControlNumberOptionalSeparator}{NormalizedCzechNormalizedPersonalIdentificationNumber[6..]}";
 
     public static CzechPersonalIdentificationNumber Parse(string potentialPersonalIdentificationNumber, IFormatProvider? formatProvider = null)
     {
@@ -63,11 +66,11 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
         }
 
         potentialPersonalIdentificationNumber = potentialPersonalIdentificationNumber.Trim();
-        potentialPersonalIdentificationNumber = potentialPersonalIdentificationNumber.Replace("/", string.Empty);
+        potentialPersonalIdentificationNumber = potentialPersonalIdentificationNumber.Replace(ControlNumberOptionalSeparator.ToString(), string.Empty);
         potentialPersonalIdentificationNumber = potentialPersonalIdentificationNumber.Replace(" ", string.Empty);
 
         var year = int.Parse(potentialPersonalIdentificationNumber[..2]);
-        var validateShortYearResult = ValidateShortYear(year);
+        var validateShortYearResult = ValidateShortYear(year, potentialPersonalIdentificationNumber);
         if (!validateShortYearResult.IsValid)
         {
             throw new FormatException(InvalidYearMessage);
@@ -81,17 +84,17 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
         }
 
         var day = int.Parse(potentialPersonalIdentificationNumber[4..6]);
-        if (!ValidateDay(validateShortYearResult.Year.Value, month, day))
+        if (!ValidateDay(validateShortYearResult.Year.Value, validateMonthResult.Month!.Value, day))
         {
             throw new FormatException(InvalidDayMessage);
         }
 
-        if (!ValidateModulo(year, potentialPersonalIdentificationNumber))
+        if (!ValidateModulo(validateShortYearResult.Year.Value, potentialPersonalIdentificationNumber))
         {
             throw new FormatException(InvalidModuloMessage);
         }
 
-        return new CzechPersonalIdentificationNumber(potentialPersonalIdentificationNumber, new DateOnly(year, validateMonthResult.Month!.Value, day), validateMonthResult.Sex!.Value);
+        return new CzechPersonalIdentificationNumber(potentialPersonalIdentificationNumber, new DateOnly(validateShortYearResult.Year.Value, validateMonthResult.Month!.Value, day), validateMonthResult.Sex!.Value);
     }
 
     public static bool TryParse(string potentialPersonalIdentificationNumber, [MaybeNullWhen(false)] out CzechPersonalIdentificationNumber result) =>
@@ -123,11 +126,19 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
         public required bool IsValid { get; init; }
     }
 
-    internal static ValidateShortYearResult ValidateShortYear(int year)
+    internal static ValidateShortYearResult ValidateShortYear(int year, string personalIdentificationNumber)
     {
-        year += (year > (DateTime.Now.Year - TwoThousand) ? NineteenHundred : TwoThousand);
-        var isValid = year >= NineteenHundred && year <= DateTime.Now.Year;
-        return new ValidateShortYearResult() { IsValid = isValid, Year = isValid ? year : null, };
+        if (year is < 0 or > 99)
+        {
+            return new ValidateShortYearResult { IsValid = false };
+        }
+
+        if (personalIdentificationNumber.Length == 9)
+        {
+            return new ValidateShortYearResult { IsValid = true, Year = NineteenHundred + year, };
+        }
+
+        return new ValidateShortYearResult { IsValid = true, Year = (year > DateTime.Now.Year - TwoThousand ? NineteenHundred : TwoThousand) + year };
     }
 
     internal sealed class ValidateMonthResult
@@ -140,17 +151,17 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
     internal static ValidateMonthResult ValidateMonth(int year, int month)
     {
         SexEnum sex;
-        if (year >= NewEraPopulationBoomStartYear && month >= WomenMonthOffsetInPopulationBoom)
+        if (year >= NewEraPopulationBoomStartYear && month is >= WomenMonthOffsetInPopulationBoom and <= WomenMonthOffsetInPopulationBoom + MonthsInYear)
         {
             sex = SexEnum.Female;
             month -= WomenMonthOffsetInPopulationBoom;
         }
-        else if (month >= WomenMonthOffset)
+        else if (month is >= WomenMonthOffset and <= WomenMonthOffset + MonthsInYear)
         {
             sex = SexEnum.Female;
             month -= WomenMonthOffset;
         }
-        else if (year >= NewEraPopulationBoomStartYear && month >= MenMonthOffsetInPopulationBoom)
+        else if (year >= NewEraPopulationBoomStartYear && month is >= MenMonthOffsetInPopulationBoom and <= MenMonthOffsetInPopulationBoom + MonthsInYear)
         {
             sex = SexEnum.Male;
             month -= MenMonthOffsetInPopulationBoom;
@@ -180,7 +191,7 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
             return personalIdentificationNumber.Length == 9;
         }
 
-        if (personalIdentificationNumber.Length != ModuloException)
+        if (personalIdentificationNumber.Length != PersonalIdentificationNumberLengthAfterOldFormat)
         {
             return false;
         }
@@ -190,22 +201,20 @@ public partial class CzechPersonalIdentificationNumber : IParsable<CzechPersonal
             return true;
         }
 
-        if (year is < PopulationBoomStartYear or > PopulationBoomEndYear)
+        if (personalIdentificationNumber.Last() != '0')
         {
             return false;
         }
 
-        var partialNumber = ulong.Parse(personalIdentificationNumber[..^1]);
-        ulong lastDigit = 0;
-        for (ulong i = 0; i < ModuloDivider; i++)
+        if (year > PopulationBoomEndYear)
         {
-            if ((partialNumber + i) % ModuloDivider != 0)
-                continue;
-
-            lastDigit = i;
-            break;
+            return false;
         }
 
-        return lastDigit != ModuloException || personalIdentificationNumber.Last() == '0';
+        personalIdentificationNumber = $"{personalIdentificationNumber[..^1]}10";
+
+        number = ulong.Parse(personalIdentificationNumber);
+
+        return number % ModuloDivider == 0;
     }
 }

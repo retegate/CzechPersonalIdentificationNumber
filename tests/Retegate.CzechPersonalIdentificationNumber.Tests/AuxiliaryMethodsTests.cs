@@ -7,16 +7,18 @@ public class AuxiliaryMethodsTests
     public sealed class ValidYearsScenario
     {
         public required int Year { get; init; }
+        public required string CzechPersonalIdentificationNumber { get; init; }
         public required int ExpectedYear { get; init; }
     }
 
     public static TheoryData<ValidYearsScenario> ValidYears =
     [
-        new() { Year = 00, ExpectedYear = 2000 },
-        new() { Year = 90, ExpectedYear = 1990 },
-        new() { Year = 22, ExpectedYear = 2022 },
-        new() { Year = 99, ExpectedYear = 1999 },
-        new() { Year = DateTime.Now.Year - 2000, ExpectedYear = DateTime.Now.Year },
+        new() { Year = 00, CzechPersonalIdentificationNumber = "1234567890", ExpectedYear = 2000 },
+        new() { Year = 90, CzechPersonalIdentificationNumber = "1234567890", ExpectedYear = 1990 },
+        new() { Year = 22, CzechPersonalIdentificationNumber = "1234567890", ExpectedYear = 2022 },
+        new() { Year = 22, CzechPersonalIdentificationNumber = "123456789", ExpectedYear = 1922 },
+        new() { Year = 99, CzechPersonalIdentificationNumber = "1234567890", ExpectedYear = 1999 },
+        new() { Year = DateTime.Now.Year - 2000, CzechPersonalIdentificationNumber = "1234567890", ExpectedYear = DateTime.Now.Year },
     ];
 
     [Theory]
@@ -24,7 +26,7 @@ public class AuxiliaryMethodsTests
     public void ValidateYear_WithValidYear_ReturnsTrue(ValidYearsScenario yearScenario)
     {
         // Arrange and Act
-        var result = CzechPersonalIdentificationNumber.ValidateShortYear(yearScenario.Year);
+        var result = CzechPersonalIdentificationNumber.ValidateShortYear(yearScenario.Year, yearScenario.CzechPersonalIdentificationNumber);
 
         // Assert
         result.IsValid.ShouldBeTrue();
@@ -32,18 +34,23 @@ public class AuxiliaryMethodsTests
         result.Year.ShouldBe(yearScenario.ExpectedYear);
     }
 
-    public static TheoryData<int> InvalidYears =
+    public sealed class InvalidYearsScenario
+    {
+        public required int Year { get; init; }
+        public required string CzechPersonalIdentificationNumber { get; init; }
+    }
+
+    public static TheoryData<InvalidYearsScenario> InvalidYears =
     [
-        1899,
-        DateTime.Now.Year + 1
+        new() { Year = 1899, CzechPersonalIdentificationNumber = "1234567890" },
     ];
 
     [Theory]
     [MemberData(nameof(InvalidYears))]
-    public void ValidateYear_WithInvalidYearOutOfRange_ReturnsFalse(int year)
+    public void ValidateYear_WithInvalidYearOutOfRange_ReturnsFalse(InvalidYearsScenario scenario)
     {
         // Arrange and Act
-        var result = CzechPersonalIdentificationNumber.ValidateShortYear(year);
+        var result = CzechPersonalIdentificationNumber.ValidateShortYear(scenario.Year, scenario.CzechPersonalIdentificationNumber);
 
         // Assert
         result.IsValid.ShouldBeFalse();
@@ -58,8 +65,8 @@ public class AuxiliaryMethodsTests
     {
         public required int Year { get; init; }
         public required int Month { get; init; }
-        public required int ExpectedMonth { get; init; }
-        public required SexEnum ExpectedSex { get; init; }
+        public int? ExpectedMonth { get; init; }
+        public SexEnum? ExpectedSex { get; init; }
     }
 
     public static TheoryData<ValidMonthsScenario> ValidMonthsScenarios
@@ -103,9 +110,9 @@ public class AuxiliaryMethodsTests
         // Assert
         result.IsValid.ShouldBeTrue();
         result.Month.ShouldNotBeNull();
-        result.Month.ShouldBe(monthScenario.ExpectedMonth);
+        result.Month.ShouldBe(monthScenario.ExpectedMonth!.Value);
         result.Sex.ShouldNotBeNull();
-        result.Sex.ShouldBe(monthScenario.ExpectedSex);
+        result.Sex.ShouldBe(monthScenario.ExpectedSex!.Value);
     }
 
     public static TheoryData<ValidMonthsScenario> InvalidMonthsScenarios
@@ -114,28 +121,28 @@ public class AuxiliaryMethodsTests
         {
             var results = new TheoryData<ValidMonthsScenario>();
 
-            udělat ry rozměry na byte pro vstup roku meědíce a dne...
-            
-            trochu složitější pravidla
-                
-                // potřebuji normální 14-50 hodnty do roku 2003 včetně
-                //potřebuji 33-49 včetně
-                //potřebuji 63-69 včetně
-                //potřebuji 83 a dále nějak..
-            
-            // results.Add(new ValidMonthsScenario { Year = 1900, Sex = SexEnum.Male, ValidMonthValue = -1 });
-            // results.Add(new ValidMonthsScenario { Year = 1900, Sex = SexEnum.Female, ValidMonthValue = -1 });
-
-            for (var month = 1; month <= 12; month++)
+            for (var month = 13; month <= 19; month++)
             {
-                // male
-                results.Add(new ValidMonthsScenario { Year = 2003, ExpectedSex = SexEnum.Male, Month = month + 50, ExpectedMonth = month });
-                //     results.Add(new ValidMonthsScenario { Year = 2004, Sex = SexEnum.Male, ValidMonthValue = month + 20 });
-                //     results.Add(new ValidMonthsScenario { Year = 2014, Sex = SexEnum.Male, ValidMonthValue = month + 70 });
-                //
-                // female
-                //     results.Add(new ValidMonthsScenario { Year = 2003, Sex = SexEnum.Female, ValidMonthValue = month + 40 });
-                //     results.Add(new ValidMonthsScenario { Year = 2004, Sex = SexEnum.Female, ValidMonthValue = month + 20 });
+                results.Add(new ValidMonthsScenario { Year = 2003, Month = month });
+                results.Add(new ValidMonthsScenario { Year = 2003, Month = month });
+            }
+
+            for (var month = 33; month <= 49; month++)
+            {
+                results.Add(new ValidMonthsScenario { Year = 2003, Month = month });
+                results.Add(new ValidMonthsScenario { Year = 2003, Month = month });
+            }
+            
+            for (var month = 63; month <= 69; month++)
+            {
+                results.Add(new ValidMonthsScenario { Year = 2003, Month = month });
+                results.Add(new ValidMonthsScenario { Year = 2003, Month = month });
+            }
+            
+            for (var month = 83; month <= 100; month++)
+            {
+                results.Add(new ValidMonthsScenario { Year = 2003, Month = month });
+                results.Add(new ValidMonthsScenario { Year = 2003, Month = month });
             }
 
             return results;

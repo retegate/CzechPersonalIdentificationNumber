@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="Bogus"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Retegate.Bogus.CzechPersonalIdentificationNumber\Retegate.Bogus.CzechPersonalIdentificationNumber.csproj" />
+    </ItemGroup>
+
+</Project>

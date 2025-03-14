@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 
+using Retegate.CzechPersonalIdentificationNumber.Tests;
+
 namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests;
 
 public class ValidationTests

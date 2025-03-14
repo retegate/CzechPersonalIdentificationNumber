@@ -9,7 +9,7 @@ namespace Retegate.Bogus.CzechPersonalIdentificationNumber;
 public static class FakerExtensions
 {
     //todo: tests
-    public static string GenerateCustomString(this Faker faker, CzechPersonalIdentificationNumberKindEnum? type, FormatEnum format)
+    public static string GenerateCzechPersonalIdentificationNumber(this Faker faker, CzechPersonalIdentificationNumberKindEnum? type, FormatEnum format)
     {
         var delimiter = GetDelimiter(format);
 
@@ -19,11 +19,11 @@ public static class FakerExtensions
         switch (type)
         {
             case CzechPersonalIdentificationNumberKindEnum.ArbitraryPerson:
-                return faker.GenerateCustomString(ChooseFromScenarios([ScenariosChoiceEnum.Female, ScenariosChoiceEnum.Male]), format);
+                return faker.GenerateCzechPersonalIdentificationNumber(ChooseFromScenarios([ScenariosChoiceEnum.Female, ScenariosChoiceEnum.Male]), format);
             case CzechPersonalIdentificationNumberKindEnum.ArbitraryMale:
-                return faker.GenerateCustomString(ChooseFromScenarios([ScenariosChoiceEnum.Male]), format);
+                return faker.GenerateCzechPersonalIdentificationNumber(ChooseFromScenarios([ScenariosChoiceEnum.Male]), format);
             case CzechPersonalIdentificationNumberKindEnum.ArbitraryFemale:
-                return faker.GenerateCustomString(ChooseFromScenarios([ScenariosChoiceEnum.Female]), format);
+                return faker.GenerateCzechPersonalIdentificationNumber(ChooseFromScenarios([ScenariosChoiceEnum.Female]), format);
             case CzechPersonalIdentificationNumberKindEnum.MaleBefore1954:
                 bottomDateLimit = GetBottomDateTimeLimit();
                 upperDateLimit = DateTime.Parse("1954-01-01T00:00:00Z");
@@ -96,16 +96,15 @@ public static class FakerExtensions
 
     internal static DateTime GetBottomDateTimeLimit()
     {
-        var bottomYearLimit = PersonalIdentificationNumber.NineteenHundred + DateTime.Now.Year - PersonalIdentificationNumber.TwoThousand - 1;
-        var bottomDateLimit = new DateTime(bottomYearLimit, 1, 1);
+        var now = DateTime.Now;
+        var bottomYearLimit = PersonalIdentificationNumber.NineteenHundred + now.Year - PersonalIdentificationNumber.TwoThousand - 1;
+        var bottomDateLimit = new DateTime(bottomYearLimit, now.Month, now.Day).AddDays(-1d);
         return bottomDateLimit;
     }
 
     internal static DateTime GetUpperDateTimeLimit()
     {
-        var upperYearLimit = DateTime.Now.Year;
-        var upperDateLimit = new DateTime(upperYearLimit, 12, 31);
-        return upperDateLimit;
+        return DateTime.Now;
     }
 
     internal static DateOnly GenerateDateOfBirth(Faker faker, DateTime bottomDateLimit, DateTime upperDateLimit)
@@ -115,35 +114,47 @@ public static class FakerExtensions
 
     internal static string FinishPersonalIdentificationNumberByGeneratingProperControlNumberAfter1954(int year, string personalIdentificationNumberFirstPart, string delimiter)
     {
-        while (true)
+        const int maxAttempts = 100;
+        var attempts = 0;
+        while (attempts < maxAttempts)
         {
+            ++attempts;
             var initialControlNumberPivot = Random.Shared.Next(0, 9999 - 11);
-            var pivot = -1;
             const int limitPivot = 10;
-            for (var i = 0; i <= limitPivot; i++)
+            var pivot = ComputeControlNumberLastDigitPivot(limitPivot, personalIdentificationNumberFirstPart, initialControlNumberPivot);
+
+            if (pivot != limitPivot)
             {
-                var possiblePersonalIdentificationNumber = $"{personalIdentificationNumberFirstPart}{(initialControlNumberPivot + i):D4}";
-
-                if (!PersonalIdentificationNumber.TryParse(possiblePersonalIdentificationNumber, null, out _))
-                {
-                    continue;
-                }
-
-                pivot = i;
-                break;
+                return $"{personalIdentificationNumberFirstPart}{delimiter}{initialControlNumberPivot:D4}";
             }
 
-            if (year >= PersonalIdentificationNumber.PopulationBoomEndYear)
+            if (year >= PersonalIdentificationNumber.PopulationBoomEndYear) //i.e. the control number has 5 digits and this is no longer valid from this year after
+            {
+                continue; //new attempty
+            }
+
+            var last3digits = initialControlNumberPivot.ToString("D4")[..^1];
+
+            return $"{personalIdentificationNumberFirstPart}{delimiter}{last3digits}0";
+        }
+
+        throw new InvalidOperationException("Unable to generate a valid personal identification number.");
+    }
+
+    internal static int ComputeControlNumberLastDigitPivot(int limitPivot, string personalIdentificationNumberFirstPart, int initialControlNumberPivot)
+    {
+        for (var i = 0; i <= limitPivot; i++)
+        {
+            var possiblePersonalIdentificationNumber = $"{personalIdentificationNumberFirstPart}{(initialControlNumberPivot + i):D4}";
+
+            if (!PersonalIdentificationNumber.TryParse(possiblePersonalIdentificationNumber, null, out _))
             {
                 continue;
             }
 
-            if (pivot == limitPivot)
-            {
-                pivot = 0;
-            }
-
-            return $"{personalIdentificationNumberFirstPart}{delimiter}{(initialControlNumberPivot + pivot):D4}";
+            return i;
         }
+
+        throw new InvalidOperationException("Unable to generate a valid personal identification number (unexpected state).");
     }
 }

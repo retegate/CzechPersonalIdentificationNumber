@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retegate.CzechPersonalIdent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests", "tests\Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests\Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.csproj", "{D2962078-C74D-4E53-940C-527486E50C21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retegate.Bogus.CzechPersonalIdentificationNumber", "tests\Retegate.Bogus.CzechPersonalIdentificationNumber\Retegate.Bogus.CzechPersonalIdentificationNumber.csproj", "{9CDA30DD-ECEE-4E5A-8A4F-296EA49EDC83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retegate.Bogus.CzechPersonalIdentificationNumber.Tests", "tests\Retegate.Bogus.CzechPersonalIdentificationNumber.Tests\Retegate.Bogus.CzechPersonalIdentificationNumber.Tests.csproj", "{9CDA30DD-ECEE-4E5A-8A4F-296EA49EDC83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
