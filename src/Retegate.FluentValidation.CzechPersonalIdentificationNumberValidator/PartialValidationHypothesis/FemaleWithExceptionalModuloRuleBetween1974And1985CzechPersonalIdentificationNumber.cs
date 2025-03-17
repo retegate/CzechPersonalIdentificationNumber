@@ -1,14 +1,10 @@
-﻿using FluentValidation;
+using FluentValidation;
 using FluentValidation.Results;
 
-namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator;
+namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.PartialValidationHypothesis;
 
-/// <summary>
-/// Based on the czech act 133/2000 from the czech collection of law. 
-/// </summary>
-public static class CzechPersonalIdentificationNumberValidationExtension
+internal static class FemaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumberValidationExtension
 {
-//todo: udělat test, že jde přepsat with messsage v return textu...fv dá jednu chybu a případně parser jich umí více podat a jsou posané pro upřesnění....ta
     /// <summary>
     /// Validation method of the czech personal identification number.
     /// </summary>
@@ -24,14 +20,14 @@ public static class CzechPersonalIdentificationNumberValidationExtension
     ///<para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidDayMessage"/></para>
     ///<para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidVerificationNumberMessage"/></para>
     /// </returns>
-    public static IRuleBuilderOptions<T, string> CzechPersonalIdentificationNumber<T>(this IRuleBuilder<T, string> ruleBuilder)
+    public static IRuleBuilderOptions<T, string> FemaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber<T>(this IRuleBuilder<T, string> ruleBuilder)
     {
         var result = ruleBuilder
             .Custom((personalIdentificationNumber, context) =>
             {
                 try
                 {
-                    _ = Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.Parse(personalIdentificationNumber);
+                    _ = CzechPersonalIdentificationNumber.ParserHypothesis.FemaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber.Parse(personalIdentificationNumber);
                 }
                 catch (FormatException e)
                 {

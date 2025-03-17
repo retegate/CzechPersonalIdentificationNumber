@@ -19,7 +19,7 @@ public class FakerExtensionsTests
     {
         get
         {
-            const int changingYear = Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.NewNumberStyleStartYear - 1900;
+            const int changingYear = Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.NewNumberStyleStartYear - Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.NineteenHundred;
 
             var maleBefore1954 = new CzechPersonalIdentificationNumberScenario
             {
@@ -82,7 +82,7 @@ public class FakerExtensionsTests
 
             var maleAfter1954 = new CzechPersonalIdentificationNumberScenario
             {
-                CzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum.MaleAfter1954,
+                CzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum.Male1954AndLaterWithNoExceptionalRules,
                 Format = FormatEnum.Normalized,
                 ExpectedAssertions = czechPersonalIdentificationNumber =>
                 {
@@ -98,14 +98,14 @@ public class FakerExtensionsTests
                     controlNumber.ShouldBeInRange(0, 9999);
 
                     var czechPersonalIdentificationNumberWithoutControlNumber = czechPersonalIdentificationNumber.Replace(Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ControlNumberOptionalSeparator.ToString(), string.Empty);
-                    var modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ModuloDivider;
+                    var modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.VerificationNumberModuloDivider;
                     modulo.ShouldBe(0);
                 }
             };
 
             var femaleAfter1954 = new CzechPersonalIdentificationNumberScenario
             {
-                CzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum.FemaleAfter1954,
+                CzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum.Female1954AndLaterWithNoExceptionalRules,
                 Format = FormatEnum.Normalized,
                 ExpectedAssertions = czechPersonalIdentificationNumber =>
                 {
@@ -123,14 +123,14 @@ public class FakerExtensionsTests
                     controlNumber.ShouldBeInRange(0, 9999);
 
                     var czechPersonalIdentificationNumberWithoutControlNumber = czechPersonalIdentificationNumber.Replace(Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ControlNumberOptionalSeparator.ToString(), string.Empty);
-                    var modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ModuloDivider;
+                    var modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.VerificationNumberModuloDivider;
                     modulo.ShouldBe(0);
                 }
             };
 
             var exceptionalMaleInPopulationBoom1974Till1985 = new CzechPersonalIdentificationNumberScenario
             {
-                CzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum.ExceptionalMaleInPopulationBoom1974Till1985,
+                CzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleMaleInPopulationBoom1974Till1985,
                 Format = FormatEnum.Normalized,
                 ExpectedAssertions = czechPersonalIdentificationNumber =>
                 {
@@ -148,7 +148,7 @@ public class FakerExtensionsTests
                     controlNumber.ShouldBeInRange(0, 9999);
 
                     var czechPersonalIdentificationNumberWithoutControlNumber = czechPersonalIdentificationNumber.Replace(Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ControlNumberOptionalSeparator.ToString(), string.Empty);
-                    var modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ModuloDivider;
+                    var modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.VerificationNumberModuloDivider;
                     try
                     {
                         modulo.ShouldBe(0);
@@ -156,7 +156,7 @@ public class FakerExtensionsTests
                     catch (ShouldAssertException)
                     {
                         czechPersonalIdentificationNumberWithoutControlNumber = czechPersonalIdentificationNumberWithoutControlNumber[..^1] + "10";
-                        modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ModuloDivider;
+                        modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.VerificationNumberModuloDivider;
                         modulo.ShouldBe(0);
                     }
                 }
@@ -164,7 +164,7 @@ public class FakerExtensionsTests
 
             var exceptionalFemaleInPopulationBoom1974Till1985 = new CzechPersonalIdentificationNumberScenario
             {
-                CzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum.ExceptionalFemaleInPopulationBoom1974Till1985,
+                CzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleFemaleInPopulationBoom1974Till1985,
                 Format = FormatEnum.Normalized,
                 ExpectedAssertions = czechPersonalIdentificationNumber =>
                 {
@@ -184,7 +184,7 @@ public class FakerExtensionsTests
                     controlNumber.ShouldBeInRange(0, 9999);
 
                     var czechPersonalIdentificationNumberWithoutControlNumber = czechPersonalIdentificationNumber.Replace(Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ControlNumberOptionalSeparator.ToString(), string.Empty);
-                    var modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ModuloDivider;
+                    var modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.VerificationNumberModuloDivider;
                     try
                     {
                         modulo.ShouldBe(0);
@@ -192,7 +192,7 @@ public class FakerExtensionsTests
                     catch (ShouldAssertException)
                     {
                         czechPersonalIdentificationNumberWithoutControlNumber = czechPersonalIdentificationNumberWithoutControlNumber[..^1] + "10";
-                        modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ModuloDivider;
+                        modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.VerificationNumberModuloDivider;
                         modulo.ShouldBe(0);
                     }
                 }
@@ -200,7 +200,7 @@ public class FakerExtensionsTests
 
             var exceptionalMaleInNewEraPopulationBoom2004 = new CzechPersonalIdentificationNumberScenario
             {
-                CzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum.ExceptionalMaleInNewEraPopulationBoom2004,
+                CzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleMaleInNewEraPopulationBoom2004,
                 Format = FormatEnum.Normalized,
                 ExpectedAssertions = czechPersonalIdentificationNumber =>
                 {
@@ -217,14 +217,14 @@ public class FakerExtensionsTests
                     controlNumber.ShouldBeInRange(0, 9999);
 
                     var czechPersonalIdentificationNumberWithoutControlNumber = czechPersonalIdentificationNumber.Replace(Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ControlNumberOptionalSeparator.ToString(), string.Empty);
-                    var modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ModuloDivider;
+                    var modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.VerificationNumberModuloDivider;
                     modulo.ShouldBe(0);
                 }
             };
 
             var exceptionalFemaleInNewEraPopulationBoom2004 = new CzechPersonalIdentificationNumberScenario
             {
-                CzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum.ExceptionalFemaleInNewEraPopulationBoom2004,
+                CzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleFemaleInNewEraPopulationBoom2004,
                 Format = FormatEnum.Normalized,
                 ExpectedAssertions = czechPersonalIdentificationNumber =>
                 {
@@ -241,7 +241,7 @@ public class FakerExtensionsTests
                     controlNumber.ShouldBeInRange(0, 9999);
 
                     var czechPersonalIdentificationNumberWithoutControlNumber = czechPersonalIdentificationNumber.Replace(Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ControlNumberOptionalSeparator.ToString(), string.Empty);
-                    var modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ModuloDivider;
+                    var modulo = long.Parse(czechPersonalIdentificationNumberWithoutControlNumber) % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.VerificationNumberModuloDivider;
                     modulo.ShouldBe(0);
                 }
             };
@@ -328,12 +328,12 @@ public class FakerExtensionsTests
             [
                 CzechPersonalIdentificationNumberKindEnum.MaleBefore1954,
                 CzechPersonalIdentificationNumberKindEnum.FemaleBefore1954,
-                CzechPersonalIdentificationNumberKindEnum.MaleAfter1954,
-                CzechPersonalIdentificationNumberKindEnum.FemaleAfter1954,
-                CzechPersonalIdentificationNumberKindEnum.ExceptionalMaleInPopulationBoom1974Till1985,
-                CzechPersonalIdentificationNumberKindEnum.ExceptionalFemaleInPopulationBoom1974Till1985,
-                CzechPersonalIdentificationNumberKindEnum.ExceptionalMaleInNewEraPopulationBoom2004,
-                CzechPersonalIdentificationNumberKindEnum.ExceptionalFemaleInNewEraPopulationBoom2004
+                CzechPersonalIdentificationNumberKindEnum.Male1954AndLaterWithNoExceptionalRules,
+                CzechPersonalIdentificationNumberKindEnum.Female1954AndLaterWithNoExceptionalRules,
+                CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleMaleInPopulationBoom1974Till1985,
+                CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleFemaleInPopulationBoom1974Till1985,
+                CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleMaleInNewEraPopulationBoom2004,
+                CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleFemaleInNewEraPopulationBoom2004
             ]
         },
         new ScenarioChoices()
@@ -342,9 +342,9 @@ public class FakerExtensionsTests
             Expected =
             [
                 CzechPersonalIdentificationNumberKindEnum.FemaleBefore1954,
-                CzechPersonalIdentificationNumberKindEnum.FemaleAfter1954,
-                CzechPersonalIdentificationNumberKindEnum.ExceptionalFemaleInPopulationBoom1974Till1985,
-                CzechPersonalIdentificationNumberKindEnum.ExceptionalFemaleInNewEraPopulationBoom2004
+                CzechPersonalIdentificationNumberKindEnum.Female1954AndLaterWithNoExceptionalRules,
+                CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleFemaleInPopulationBoom1974Till1985,
+                CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleFemaleInNewEraPopulationBoom2004
             ]
         },
         new ScenarioChoices()
@@ -353,9 +353,9 @@ public class FakerExtensionsTests
             Expected =
             [
                 CzechPersonalIdentificationNumberKindEnum.MaleBefore1954,
-                CzechPersonalIdentificationNumberKindEnum.MaleAfter1954,
-                CzechPersonalIdentificationNumberKindEnum.ExceptionalMaleInPopulationBoom1974Till1985,
-                CzechPersonalIdentificationNumberKindEnum.ExceptionalMaleInNewEraPopulationBoom2004,
+                CzechPersonalIdentificationNumberKindEnum.Male1954AndLaterWithNoExceptionalRules,
+                CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleMaleInPopulationBoom1974Till1985,
+                CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleMaleInNewEraPopulationBoom2004,
             ]
         },
     };
@@ -481,13 +481,13 @@ public class FakerExtensionsTests
             personalIdentificationNumber.ShouldBeInRange(0, 999999_9999);
             try
             {
-                (personalIdentificationNumber % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ModuloDivider).ShouldBe(0);
+                (personalIdentificationNumber % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.VerificationNumberModuloDivider).ShouldBe(0);
             }
             catch
             {
                 year.ShouldBeLessThanOrEqualTo(Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.PopulationBoomEndYear);
                 actual[^1].ShouldBe('0');
-                (long.Parse($"{actual[..^1]}10") % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.ModuloDivider).ShouldBe(0);
+                (long.Parse($"{actual[..^1]}10") % Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.VerificationNumberModuloDivider).ShouldBe(0);
             }
         }
     }

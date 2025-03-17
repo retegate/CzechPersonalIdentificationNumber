@@ -35,37 +35,37 @@ public static class FakerExtensions
                 dateOfBirth = DateOnly.FromDateTime(faker.Date.Between(bottomDateLimit, upperDateLimit));
                 return $"{dateOfBirth:yy}{(dateOfBirth.Month + 50):D2}{dateOfBirth:dd}{delimiter}{faker.Random.Number(0, 999):D3}";
 
-            case CzechPersonalIdentificationNumberKindEnum.MaleAfter1954:
+            case CzechPersonalIdentificationNumberKindEnum.Male1954AndLaterWithNoExceptionalRules:
                 bottomDateLimit = DateTime.Parse("1954-01-01T00:00:00Z");
                 upperDateLimit = GetUpperDateTimeLimit();
                 dateOfBirth = DateOnly.FromDateTime(faker.Date.Between(bottomDateLimit, upperDateLimit));
                 personalIdentificationNumberFirstPart = $"{dateOfBirth:yy}{(dateOfBirth.Month):D2}{dateOfBirth:dd}";
                 return FinishPersonalIdentificationNumberByGeneratingProperControlNumberAfter1954(dateOfBirth.Year, personalIdentificationNumberFirstPart, delimiter);
-            case CzechPersonalIdentificationNumberKindEnum.FemaleAfter1954:
+            case CzechPersonalIdentificationNumberKindEnum.Female1954AndLaterWithNoExceptionalRules:
                 bottomDateLimit = DateTime.Parse("1954-01-01T00:00:00Z");
                 upperDateLimit = GetUpperDateTimeLimit();
                 dateOfBirth = DateOnly.FromDateTime(faker.Date.Between(bottomDateLimit, upperDateLimit));
                 personalIdentificationNumberFirstPart = $"{dateOfBirth:yy}{(dateOfBirth.Month + 50):D2}{dateOfBirth:dd}";
                 return FinishPersonalIdentificationNumberByGeneratingProperControlNumberAfter1954(dateOfBirth.Year, personalIdentificationNumberFirstPart, delimiter);
 
-            case CzechPersonalIdentificationNumberKindEnum.ExceptionalMaleInPopulationBoom1974Till1985:
+            case CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleMaleInPopulationBoom1974Till1985:
                 bottomDateLimit = DateTime.Parse("1974-01-01T00:00:00Z");
                 upperDateLimit = DateTime.Parse("1985-12-31T23:59:59Z");
                 dateOfBirth = DateOnly.FromDateTime(faker.Date.Between(bottomDateLimit, upperDateLimit));
                 return $"{dateOfBirth:yy}{(dateOfBirth.Month):D2}{dateOfBirth:dd}{delimiter}{faker.Random.Number(1, 9999):D4}";
-            case CzechPersonalIdentificationNumberKindEnum.ExceptionalFemaleInPopulationBoom1974Till1985:
+            case CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleFemaleInPopulationBoom1974Till1985:
                 bottomDateLimit = DateTime.Parse("1974-01-01T00:00:00Z");
                 upperDateLimit = DateTime.Parse("1985-12-31T23:59:59Z");
                 dateOfBirth = DateOnly.FromDateTime(faker.Date.Between(bottomDateLimit, upperDateLimit));
                 return $"{dateOfBirth:yy}{(dateOfBirth.Month + 50):D2}{dateOfBirth:dd}{delimiter}{faker.Random.Number(1, 9999):D4}";
 
-            case CzechPersonalIdentificationNumberKindEnum.ExceptionalMaleInNewEraPopulationBoom2004:
+            case CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleMaleInNewEraPopulationBoom2004:
                 bottomDateLimit = DateTime.Parse("1974-01-01T00:00:00Z");
                 upperDateLimit = DateTime.Parse("1985-12-31T23:59:59Z");
                 dateOfBirth = DateOnly.FromDateTime(faker.Date.Between(bottomDateLimit, upperDateLimit));
                 personalIdentificationNumberFirstPart = $"{dateOfBirth:yy}{(dateOfBirth.Month + 2):D2}{dateOfBirth:dd}";
                 return FinishPersonalIdentificationNumberByGeneratingProperControlNumberAfter1954(dateOfBirth.Year, personalIdentificationNumberFirstPart, delimiter);
-            case CzechPersonalIdentificationNumberKindEnum.ExceptionalFemaleInNewEraPopulationBoom2004:
+            case CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleFemaleInNewEraPopulationBoom2004:
                 bottomDateLimit = DateTime.Parse("1974-01-01T00:00:00Z");
                 upperDateLimit = DateTime.Parse("1985-12-31T23:59:59Z");
                 dateOfBirth = DateOnly.FromDateTime(faker.Date.Between(bottomDateLimit, upperDateLimit));

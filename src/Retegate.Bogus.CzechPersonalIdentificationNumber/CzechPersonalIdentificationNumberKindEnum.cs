@@ -13,14 +13,14 @@ public enum CzechPersonalIdentificationNumberKindEnum : byte
 
     [SexMapping(ScenariosChoiceEnum.Female)]
     FemaleBefore1954 = 4,
-    [SexMapping(ScenariosChoiceEnum.Male)] MaleAfter1954 = 5,
+    [SexMapping(ScenariosChoiceEnum.Male)] Male1954AndLaterWithNoExceptionalRules = 5,
 
     [SexMapping(ScenariosChoiceEnum.Female)]
-    FemaleAfter1954 = 6,
-    [SexMapping(ScenariosChoiceEnum.Male)] ExceptionalMaleInPopulationBoom1974Till1985 = 7,
-    [SexMapping(ScenariosChoiceEnum.Male)] ExceptionalFemaleInPopulationBoom1974Till1985 = 8,
-    [SexMapping(ScenariosChoiceEnum.Male)] ExceptionalMaleInNewEraPopulationBoom2004 = 9,
+    Female1954AndLaterWithNoExceptionalRules = 6,
+    [SexMapping(ScenariosChoiceEnum.Male)] ExceptionalRuleMaleInPopulationBoom1974Till1985 = 7,
+    [SexMapping(ScenariosChoiceEnum.Male)] ExceptionalRuleFemaleInPopulationBoom1974Till1985 = 8,
+    [SexMapping(ScenariosChoiceEnum.Male)] ExceptionalRuleMaleInNewEraPopulationBoom2004 = 9,
 
     [SexMapping(ScenariosChoiceEnum.Female)]
-    ExceptionalFemaleInNewEraPopulationBoom2004 = 10
+    ExceptionalRuleFemaleInNewEraPopulationBoom2004 = 10
 }
