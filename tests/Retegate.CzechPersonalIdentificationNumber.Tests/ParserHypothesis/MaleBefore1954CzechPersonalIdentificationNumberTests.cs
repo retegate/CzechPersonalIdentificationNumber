@@ -20,9 +20,9 @@ public sealed class MaleBefore1954CzechPersonalIdentificationNumberTests :
 
     public static TheoryData<string> InvalidYearScenarios => CommonScenarios.InvalidYearBefore1954Scenarios;
 
-    public static TheoryData<string> InvalidMonthScenarios => CommonScenarios.InvalidMaleMonthScenarios;
+    public static TheoryData<string,string> InvalidMonthScenarios => CommonScenarios.InvalidFemaleMonthBefore1954Scenarios;
 
-    public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidDateScenarios;
+    public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidMaleDateBefore1954Scenarios;
 
     public static TheoryData<string> InvalidVerificationNumberScenarios => [];
 }

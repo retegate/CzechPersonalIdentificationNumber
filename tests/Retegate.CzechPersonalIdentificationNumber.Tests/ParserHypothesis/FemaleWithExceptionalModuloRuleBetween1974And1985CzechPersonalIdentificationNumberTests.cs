@@ -29,9 +29,9 @@ public sealed class FemaleWithExceptionalModuloRuleBetween1974And1985CzechPerson
 
     public static TheoryData<string> InvalidYearScenarios => CommonScenarios.InvalidYear1954AndAfterScenarios;
 
-    public static TheoryData<string> InvalidMonthScenarios => CommonScenarios.InvalidFemaleMonthScenarios;
+    public static TheoryData<string,string> InvalidMonthScenarios => CommonScenarios.InvalidFemaleMonth1954AndLaterScenarios;
 
-    public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidDateScenarios;
+    public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidFemaleDate1954AndLaterScenarios;
 
     public static TheoryData<string> InvalidVerificationNumberScenarios => ["7462242051"];
 }

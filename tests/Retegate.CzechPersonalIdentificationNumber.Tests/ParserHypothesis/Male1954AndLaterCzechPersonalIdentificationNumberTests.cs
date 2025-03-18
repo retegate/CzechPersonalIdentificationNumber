@@ -28,7 +28,7 @@ public sealed class Male1954AndLaterCzechPersonalIdentificationNumberTests :
         },
         new()
         {
-            PersonalIdentificationNumber = "20 072 8/93 72",
+            PersonalIdentificationNumber = "200728/9372",
             DateOfBirth = new DateOnly(2020, 7, 28),
             Sex = SexEnum.Male
         },
@@ -38,9 +38,9 @@ public sealed class Male1954AndLaterCzechPersonalIdentificationNumberTests :
 
     public static TheoryData<string> InvalidYearScenarios => CommonScenarios.InvalidYear1954AndAfterScenarios;
 
-    public static TheoryData<string> InvalidMonthScenarios => CommonScenarios.InvalidMaleScenarios;
+    public static TheoryData<string,string> InvalidMonthScenarios => CommonScenarios.InvalidFemaleMonth1954AndLaterScenarios;
 
-    public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidDateScenarios;
+    public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidMaleDate1954AndLaterScenarios;
 
     public static TheoryData<string> InvalidVerificationNumberScenarios =>
         CommonScenarios.InvalidVerificationNumber1954AndAfterScenarios;

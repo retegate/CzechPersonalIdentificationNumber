@@ -18,7 +18,7 @@ public class Female1954AndLaterCzechPersonalIdentificationNumberTests :
         },
         new()
         {
-            PersonalIdentificationNumber = "5455052437",
+            PersonalIdentificationNumber = "5455054143",
             DateOfBirth = new DateOnly(1954, 5, 5),
             Sex = SexEnum.Female,
         },
@@ -30,7 +30,7 @@ public class Female1954AndLaterCzechPersonalIdentificationNumberTests :
         },
         new()
         {
-            PersonalIdentificationNumber = "105 728 38985",
+            PersonalIdentificationNumber = "1057289585",
             DateOfBirth = new DateOnly(2010, 7, 28),
             Sex = SexEnum.Female
         },
@@ -40,9 +40,9 @@ public class Female1954AndLaterCzechPersonalIdentificationNumberTests :
 
     public static TheoryData<string> InvalidYearScenarios => CommonScenarios.InvalidYear1954AndAfterScenarios;
 
-    public static TheoryData<string> InvalidMonthScenarios => CommonScenarios.InvalidFemaleMonthScenarios;
+    public static TheoryData<string,string> InvalidMonthScenarios => CommonScenarios.InvalidFemaleMonth1954AndLaterScenarios;
 
-    public static TheoryData<string> InvalidDateScenarios =>CommonScenarios.InvalidDateScenarios;
+    public static TheoryData<string> InvalidDateScenarios =>CommonScenarios.InvalidFemaleDate1954AndLaterScenarios;
 
     public static TheoryData<string> InvalidVerificationNumberScenarios =>
         CommonScenarios.InvalidVerificationNumber1954AndAfterScenarios;

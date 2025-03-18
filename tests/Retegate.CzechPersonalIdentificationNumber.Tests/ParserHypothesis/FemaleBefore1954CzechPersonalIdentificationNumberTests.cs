@@ -12,7 +12,7 @@ public sealed class FemaleBefore1954CzechPersonalIdentificationNumberTests :
     [
         new()
         {
-            PersonalIdentificationNumber = "5312241785",
+            PersonalIdentificationNumber = "536224178",
             DateOfBirth = new DateOnly(1953, 12, 24),
             Sex = SexEnum.Female,
         },
@@ -22,9 +22,9 @@ public sealed class FemaleBefore1954CzechPersonalIdentificationNumberTests :
 
     public static TheoryData<string> InvalidYearScenarios => CommonScenarios.InvalidYearBefore1954Scenarios;
 
-    public static TheoryData<string> InvalidMonthScenarios => CommonScenarios.InvalidFemaleMonthScenarios;
+    public static TheoryData<string,string> InvalidMonthScenarios => CommonScenarios.InvalidFemaleMonthBefore1954Scenarios;
 
-    public static TheoryData<string> InvalidDateScenarios =>CommonScenarios.InvalidDateScenarios;
+    public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidFemaleDateBefore1954Scenarios;
 
     public static TheoryData<string> InvalidVerificationNumberScenarios => [];
 }

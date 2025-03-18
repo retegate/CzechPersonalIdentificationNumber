@@ -53,9 +53,9 @@ public abstract class
 
     [Theory]
     [MemberData(nameof(InvalidMonthScenariosOverride))]
-    public void Parse_InvalidMonthInput_ThrowsFormatException(string input)
+    public void Parse_InvalidMonthInput_ThrowsFormatException(string input, string expectedMessage)
     {
-        InvalidScenarioProcessing(input, CzechPersonalIdentificationNumber.InvalidFemaleMonthMessage);
+        InvalidScenarioProcessing(input, expectedMessage);
     }
 
     [Theory]
@@ -66,7 +66,8 @@ public abstract class
     }
 
     [Theory]
-    [MemberData(nameof(InvalidVerificationNumberScenariosOverride))]
+    [MemberData(nameof(InvalidVerificationNumberScenariosOverride),
+        DisableDiscoveryEnumeration = true)] //tolerates empty scenario collection
     public void Parse_InvalidVerificationNumberInput_ThrowsFormatException(string input)
     {
         InvalidScenarioProcessing(input, CzechPersonalIdentificationNumber.InvalidVerificationNumberMessage);
@@ -82,16 +83,16 @@ public abstract class
         // Act
         var action = () =>
         {
-            parseResult = TPersonalIdentificationNumber.Parse(input, null!);
             tryParseResult =
                 TPersonalIdentificationNumber.TryParse(input, null!, out tryParseOutput!);
+            parseResult = TPersonalIdentificationNumber.Parse(input, null!);
         };
 
         // Assert
         var ex = action.ShouldThrow<FormatException>();
         ex.Message.ShouldContain(expectedMessage);
 
-        parseResult.ShouldNotBeNull();
+        parseResult.ShouldBeNull();
         tryParseOutput.ShouldBeNull();
         tryParseResult.ShouldBeFalse();
     }
@@ -103,8 +104,11 @@ public abstract class
     public static TheoryData<string> InvalidYearScenariosOverride =>
         TSpecificCzechIdentificationNumberTests.InvalidYearScenarios;
 
-    public static TheoryData<string> InvalidMonthScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.InvalidMonthScenarios;
+    public static TheoryData<string>? InvalidMaleMonthScenariosOverride =>
+        TSpecificCzechIdentificationNumberTests.InvalidMaleMonthScenarios;
+
+    public static TheoryData<string>? InvalidFemaleMonthScenariosOverride =>
+        TSpecificCzechIdentificationNumberTests.InvalidFemaleMonthScenarios;
 
     public static TheoryData<string> InvalidDateScenariosOverride =>
         TSpecificCzechIdentificationNumberTests.InvalidDateScenarios;
