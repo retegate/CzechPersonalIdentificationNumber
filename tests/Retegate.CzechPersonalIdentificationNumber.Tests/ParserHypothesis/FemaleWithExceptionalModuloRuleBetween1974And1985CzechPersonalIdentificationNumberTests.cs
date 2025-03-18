@@ -20,7 +20,7 @@ public sealed class FemaleWithExceptionalModuloRuleBetween1974And1985CzechPerson
         new()
         {
             PersonalIdentificationNumber = "8562247550",
-            DateOfBirth = new DateOnly(1986, 12, 24),
+            DateOfBirth = new DateOnly(1985, 12, 24),
             Sex = SexEnum.Female
         },
     ];
@@ -29,7 +29,8 @@ public sealed class FemaleWithExceptionalModuloRuleBetween1974And1985CzechPerson
 
     public static TheoryData<string> InvalidYearScenarios => CommonScenarios.InvalidYear1954AndAfterScenarios;
 
-    public static TheoryData<string,string> InvalidMonthScenarios => CommonScenarios.InvalidFemaleMonth1954AndLaterScenarios;
+    public static TheoryData<string> InvalidMaleMonthScenarios => [];
+    public static TheoryData<string> InvalidFemaleMonthScenarios => CommonScenarios.InvalidFemaleMonth1954AndLaterScenarios;
 
     public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidFemaleDate1954AndLaterScenarios;
 

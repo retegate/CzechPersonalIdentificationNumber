@@ -52,10 +52,17 @@ public abstract class
     }
 
     [Theory]
-    [MemberData(nameof(InvalidMonthScenariosOverride))]
-    public void Parse_InvalidMonthInput_ThrowsFormatException(string input, string expectedMessage)
+    [MemberData(nameof(InvalidMaleMonthScenariosOverride), DisableDiscoveryEnumeration = true)]
+    public void Parse_InvalidMaleMonthInput_ThrowsFormatException(string input)
     {
-        InvalidScenarioProcessing(input, expectedMessage);
+        InvalidScenarioProcessing(input, CzechPersonalIdentificationNumber.InvalidMaleMonthMessage);
+    }
+
+    [Theory]
+    [MemberData(nameof(InvalidFemaleMonthScenariosOverride), DisableDiscoveryEnumeration = true)]
+    public void Parse_InvalidFemaleMonthInput_ThrowsFormatException(string input)
+    {
+        InvalidScenarioProcessing(input, CzechPersonalIdentificationNumber.InvalidFemaleMonthMessage);
     }
 
     [Theory]

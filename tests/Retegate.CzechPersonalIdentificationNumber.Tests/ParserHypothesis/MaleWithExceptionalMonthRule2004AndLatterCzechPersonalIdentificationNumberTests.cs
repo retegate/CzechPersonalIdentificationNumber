@@ -29,11 +29,13 @@ public sealed class MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdenti
 
     public static TheoryData<string> InvalidYearScenarios => CommonScenarios.InvalidYear1954AndAfterScenarios;
 
-    public static TheoryData<string,string> InvalidMonthScenarios =>
+    public static TheoryData<string> InvalidMaleMonthScenarios =>
         CommonScenarios.InvalidMaleMonth2004AndAfterExceptionalRuleScenarios;
 
-    public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidMaleDate1954AndLaterScenarios;
+    public static TheoryData<string> InvalidFemaleMonthScenarios => [];
+
+    public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidMaleDate2004AndLaterScenarios;
 
     public static TheoryData<string> InvalidVerificationNumberScenarios =>
-        CommonScenarios.InvalidVerificationNumber1954AndAfterScenarios;
+        CommonScenarios.InvalidMaleVerificationNumber2004AndAfterScenarios;
 }

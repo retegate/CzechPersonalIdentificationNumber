@@ -22,7 +22,10 @@ public sealed class FemaleBefore1954CzechPersonalIdentificationNumberTests :
 
     public static TheoryData<string> InvalidYearScenarios => CommonScenarios.InvalidYearBefore1954Scenarios;
 
-    public static TheoryData<string,string> InvalidMonthScenarios => CommonScenarios.InvalidFemaleMonthBefore1954Scenarios;
+    public static TheoryData<string> InvalidMaleMonthScenarios => [];
+
+    public static TheoryData<string> InvalidFemaleMonthScenarios =>
+        CommonScenarios.InvalidFemaleMonthBefore1954Scenarios;
 
     public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidFemaleDateBefore1954Scenarios;
 
