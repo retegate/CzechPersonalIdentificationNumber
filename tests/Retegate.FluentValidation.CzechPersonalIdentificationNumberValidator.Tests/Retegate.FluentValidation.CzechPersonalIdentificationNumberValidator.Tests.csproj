@@ -5,8 +5,4 @@
       <ProjectReference Include="..\Retegate.CzechPersonalIdentificationNumber.Tests\Retegate.CzechPersonalIdentificationNumber.Tests.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="PartialValidationHypothesis\" />
-    </ItemGroup>
-
 </Project>

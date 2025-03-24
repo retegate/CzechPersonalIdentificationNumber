@@ -11,10 +11,13 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ASystemException_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2024_002E3_003Fresharper_002Dhost_003FSourcesCache_003Feb883067908c5145e4a877dccdcb70822b4af05a67d69cd4bc64986a56f407_003FSystemException_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATestInvoker_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2024_002E3_003Fresharper_002Dhost_003FSourcesCache_003F5e14a4e27990972fa4ae94975603bd298aaf328ee083c03b10569ee4724d57_003FTestInvoker_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATimeOnly_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2024_002E3_003Fresharper_002Dhost_003FSourcesCache_003F2e3cee5a6ecdd5edef99ee7810532f4c6ebbf55fa5af95b4423df0decf3ee8_003FTimeOnly_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b5bc0fea_002Dcefd_002D41d7_002Db807_002D30cb48116fde/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AuxiliaryMethodsTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=60125800_002D9e10_002D4ac1_002D8d3b_002D8f8ad1f6cd1e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;Solution /&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bb1d9fcf_002D1c25_002D4cc3_002D82ce_002D1400d5b5b17b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ValidateYear_WithValidYear_ReturnsTrue" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b5bc0fea_002Dcefd_002D41d7_002Db807_002D30cb48116fde/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AuxiliaryMethodsTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Solution /&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bb1d9fcf_002D1c25_002D4cc3_002D82ce_002D1400d5b5b17b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ValidateYear_WithValidYear_ReturnsTrue" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::5DA47763-4B3A-2F6D-253A-2E339E7149E1::net9.0::Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.Female1954AndLaterCzechPersonalIdentificationNumberTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::5DA47763-4B3A-2F6D-253A-2E339E7149E1::net9.0::Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.FemaleBefore1954CzechPersonalIdentificationNumberTests&lt;/TestId&gt;
@@ -26,5 +29,6 @@
     &lt;TestId&gt;xUnit::5DA47763-4B3A-2F6D-253A-2E339E7149E1::net9.0::Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::5DA47763-4B3A-2F6D-253A-2E339E7149E1::net9.0::Retegate.CzechPersonalIdentificationNumber.Tests.ParseTests.Parse_WithValidPersonalIdentificationNumber_ReturnsCzechPersonalIdentificationNumber&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::5DA47763-4B3A-2F6D-253A-2E339E7149E1::net9.0::Retegate.CzechPersonalIdentificationNumber.Tests.ParseTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::3E9D1779-C8E1-47A4-F9FA-B54DBCD7313D::net9.0::Retegate.Bogus.CzechPersonalIdentificationNumber.Tests.FakerExtensionsTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

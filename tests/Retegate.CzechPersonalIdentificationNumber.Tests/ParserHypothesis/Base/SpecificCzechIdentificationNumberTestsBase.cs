@@ -6,9 +6,6 @@ public abstract class
     IParsable<TPersonalIdentificationNumber>
     where TSpecificCzechIdentificationNumberTests : ISpecificCzechIdentificationNumberTests
 {
-    public static TheoryData<PositiveTestScenario> ValidScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.ValidScenarios;
-
     [Theory]
     [MemberData(nameof(ValidScenariosOverride))]
     public void Parse_ValidInput_ReturnsIdentificationNumber(PositiveTestScenario scenario)
@@ -104,6 +101,8 @@ public abstract class
         tryParseResult.ShouldBeFalse();
     }
 
+    public static TheoryData<PositiveTestScenario> ValidScenariosOverride =>
+        TSpecificCzechIdentificationNumberTests.ValidScenarios;
 
     public static TheoryData<string> InvalidPatternScenariosOverride =>
         TSpecificCzechIdentificationNumberTests.InvalidPatternScenarios;

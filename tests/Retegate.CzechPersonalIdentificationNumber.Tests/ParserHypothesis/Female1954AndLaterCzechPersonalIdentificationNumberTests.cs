@@ -42,11 +42,9 @@ public class Female1954AndLaterCzechPersonalIdentificationNumberTests :
 
     public static TheoryData<string> InvalidMaleMonthScenarios => [];
 
-    public static TheoryData<string> InvalidFemaleMonthScenarios =>
-        CommonScenarios.InvalidFemaleMonth1954AndLaterScenarios;
+    public static TheoryData<string> InvalidFemaleMonthScenarios => ["540101/1234", "541201/1234", "545001/1234"];
 
     public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidFemaleDate1954AndLaterScenarios;
 
-    public static TheoryData<string> InvalidVerificationNumberScenarios =>
-        CommonScenarios.InvalidFemaleVerificationNumber1954AndAfterScenarios;
+    public static TheoryData<string> InvalidVerificationNumberScenarios => [" 745505/ 8791"];
 }

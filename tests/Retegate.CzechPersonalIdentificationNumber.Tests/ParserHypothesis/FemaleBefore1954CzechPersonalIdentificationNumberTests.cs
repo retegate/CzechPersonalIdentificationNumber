@@ -24,10 +24,9 @@ public sealed class FemaleBefore1954CzechPersonalIdentificationNumberTests :
 
     public static TheoryData<string> InvalidMaleMonthScenarios => [];
 
-    public static TheoryData<string> InvalidFemaleMonthScenarios =>
-        CommonScenarios.InvalidFemaleMonthBefore1954Scenarios;
+    public static TheoryData<string> InvalidFemaleMonthScenarios => ["450101/123", "531201/234", "535001/234"];
 
-    public static TheoryData<string> InvalidDateScenarios => CommonScenarios.InvalidFemaleDateBefore1954Scenarios;
+    public static TheoryData<string> InvalidDateScenarios => ["535132/123", "535100/123"];
 
     public static TheoryData<string> InvalidVerificationNumberScenarios => [];
 }

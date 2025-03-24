@@ -5,6 +5,8 @@ namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.P
 
 internal static class Female1954AndLaterCzechPersonalIdentificationNumberValidationExtension 
 {
+    
+    
     /// <summary>
     /// Validation method of the czech personal identification number.
     /// </summary>

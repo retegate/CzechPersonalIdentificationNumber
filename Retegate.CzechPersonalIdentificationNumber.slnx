@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/SolutionItems/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="readme.md" />
+    <File Path="Retegate.CzechPersonalIdentificationNumber.slnx" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Retegate.Bogus.CzechPersonalIdentificationNumber/Retegate.Bogus.CzechPersonalIdentificationNumber.csproj" />
+    <Project Path="src/Retegate.CzechPersonalIdentificationNumber/Retegate.CzechPersonalIdentificationNumber.csproj" />
+    <Project Path="src/Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator/Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Retegate.Bogus.CzechPersonalIdentificationNumber.Tests/Retegate.Bogus.CzechPersonalIdentificationNumber.Tests.csproj" />
+    <Project Path="tests/Retegate.CzechPersonalIdentificationNumber.Tests/Retegate.CzechPersonalIdentificationNumber.Tests.csproj" />
+    <Project Path="tests/Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests/Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.csproj" />
+    <File Path="tests/Directory.Build.props" />
+  </Folder>
+</Solution>
