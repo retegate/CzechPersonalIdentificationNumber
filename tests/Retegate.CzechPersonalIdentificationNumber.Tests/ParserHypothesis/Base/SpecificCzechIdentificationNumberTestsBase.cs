@@ -1,10 +1,13 @@
 namespace Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.Base;
 
 public abstract class
-    SpecificCzechIdentificationNumberTestsBase<TPersonalIdentificationNumber, TSpecificCzechIdentificationNumberTests>
+    SpecificCzechIdentificationNumberTestsBase<TPersonalIdentificationNumber, TSpecificCzechIdentificationNumberTests,
+        TTestScenarios>
     where TPersonalIdentificationNumber : CzechPersonalIdentificationNumber,
     IParsable<TPersonalIdentificationNumber>
-    where TSpecificCzechIdentificationNumberTests : ISpecificCzechIdentificationNumberTests
+    where TSpecificCzechIdentificationNumberTests :
+    ITestScenarios<TTestScenarios>
+    where TTestScenarios : ISpecificCzechIdentificationNumberTests
 {
     [Theory]
     [MemberData(nameof(ValidScenariosOverride))]
@@ -102,23 +105,23 @@ public abstract class
     }
 
     public static TheoryData<PositiveTestScenario> ValidScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.ValidScenarios;
+        TTestScenarios.ValidScenarios;
 
     public static TheoryData<string> InvalidPatternScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.InvalidPatternScenarios;
+        TTestScenarios.InvalidPatternScenarios;
 
     public static TheoryData<string> InvalidYearScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.InvalidYearScenarios;
+        TTestScenarios.InvalidYearScenarios;
 
     public static TheoryData<string>? InvalidMaleMonthScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.InvalidMaleMonthScenarios;
+        TTestScenarios.InvalidMaleMonthScenarios;
 
     public static TheoryData<string>? InvalidFemaleMonthScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.InvalidFemaleMonthScenarios;
+        TTestScenarios.InvalidFemaleMonthScenarios;
 
     public static TheoryData<string> InvalidDateScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.InvalidDateScenarios;
+        TTestScenarios.InvalidDateScenarios;
 
     public static TheoryData<string> InvalidVerificationNumberScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.InvalidVerificationNumberScenarios;
+        TTestScenarios.InvalidVerificationNumberScenarios;
 }

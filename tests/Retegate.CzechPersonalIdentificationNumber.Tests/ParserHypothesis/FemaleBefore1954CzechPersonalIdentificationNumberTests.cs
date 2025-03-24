@@ -1,32 +1,14 @@
 using Retegate.CzechPersonalIdentificationNumber.ParserHypothesis;
 using Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.Base;
+using Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.Scenarios;
 
 namespace Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis;
 
 public sealed class FemaleBefore1954CzechPersonalIdentificationNumberTests :
     SpecificCzechIdentificationNumberTestsBase<FemaleBefore1954CzechPersonalIdentificationNumber,
-        FemaleBefore1954CzechPersonalIdentificationNumberTests>,
-    ISpecificCzechIdentificationNumberTests
+        FemaleBefore1954CzechPersonalIdentificationNumberTests,
+        FemaleBefore1954CzechPersonalIdentificationNumberScenarios>,
+    ITestScenarios<FemaleBefore1954CzechPersonalIdentificationNumberScenarios>
 {
-    public static TheoryData<Base.PositiveTestScenario> ValidScenarios =>
-    [
-        new()
-        {
-            PersonalIdentificationNumber = "536224178",
-            DateOfBirth = new DateOnly(1953, 12, 24),
-            Sex = SexEnum.Female,
-        },
-    ];
-
-    public static TheoryData<string> InvalidPatternScenarios => CommonScenarios.InvalidPatternBefore1954Scenarios;
-
-    public static TheoryData<string> InvalidYearScenarios => CommonScenarios.InvalidYearBefore1954Scenarios;
-
-    public static TheoryData<string> InvalidMaleMonthScenarios => [];
-
-    public static TheoryData<string> InvalidFemaleMonthScenarios => ["450101/123", "531201/234", "535001/234"];
-
-    public static TheoryData<string> InvalidDateScenarios => ["535132/123", "535100/123"];
-
-    public static TheoryData<string> InvalidVerificationNumberScenarios => [];
+    public static FemaleBefore1954CzechPersonalIdentificationNumberScenarios TestScenarios => new();
 }
