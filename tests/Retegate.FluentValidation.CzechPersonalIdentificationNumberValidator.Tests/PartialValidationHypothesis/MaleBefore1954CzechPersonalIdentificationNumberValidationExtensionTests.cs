@@ -1,22 +1,17 @@
-using System.Diagnostics.CodeAnalysis;
-
 using FluentValidation;
 
-using Retegate.CzechPersonalIdentificationNumber;
-using Retegate.CzechPersonalIdentificationNumber.PartialParsing.Month;
-using Retegate.CzechPersonalIdentificationNumber.PartialParsing.Year;
-using Retegate.CzechPersonalIdentificationNumber.PartialValidators.Patterns;
-using Retegate.CzechPersonalIdentificationNumber.PartialValidators.VerificationNumbers;
+using Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.Scenarios;
 using Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.PartialValidationHypothesis;
 using Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.PartialValidationHypothesis.Base;
 
 namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.PartialValidationHypothesis;
 
-public sealed class MaleBefore1954CzechPersonalIdentificationNumberValidationExtensionTests 
+public sealed class MaleBefore1954CzechPersonalIdentificationNumberValidationExtensionTests()
     : ValidationTestsBase<Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator,
-            TestModel, Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests>(new Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator(),
+            TestModel, MaleBefore1954CzechPersonalIdentificationNumberScenarios>(
+            new Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator(),
             x => new TestModel { PersonalIdentificationNumber = x }),
-        ISpecificCzechIdentificationNumberTests
+        ITestScenarios<MaleBefore1954CzechPersonalIdentificationNumberScenarios>
 {
     public class TestValidator : AbstractValidator<TestModel>
     {
@@ -26,4 +21,6 @@ public sealed class MaleBefore1954CzechPersonalIdentificationNumberValidationExt
                 .Male1954AndLaterCzechPersonalIdentificationNumber();
         }
     }
+
+    public static MaleBefore1954CzechPersonalIdentificationNumberScenarios TestScenarios => new();
 }

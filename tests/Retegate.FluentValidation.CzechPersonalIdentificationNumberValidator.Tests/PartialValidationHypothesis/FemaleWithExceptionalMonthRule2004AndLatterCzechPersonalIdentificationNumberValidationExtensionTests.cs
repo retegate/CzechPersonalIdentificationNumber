@@ -1,22 +1,18 @@
-using System.Diagnostics.CodeAnalysis;
-
 using FluentValidation;
 
-using Retegate.CzechPersonalIdentificationNumber;
-using Retegate.CzechPersonalIdentificationNumber.PartialParsing.Month;
-using Retegate.CzechPersonalIdentificationNumber.PartialParsing.Year;
-using Retegate.CzechPersonalIdentificationNumber.PartialValidators.Patterns;
-using Retegate.CzechPersonalIdentificationNumber.PartialValidators.VerificationNumbers;
+using Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.Scenarios;
 using Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.PartialValidationHypothesis;
 using Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.PartialValidationHypothesis.Base;
 
 namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.PartialValidationHypothesis;
 
-public sealed class FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberValidationExtensionTests 
+public sealed class
+    FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberValidationExtensionTests()
     : ValidationTestsBase<Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator,
-            TestModel, Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests>(new Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator(),
+            TestModel, FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberScenarios>(
+            new Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator(),
             x => new TestModel { PersonalIdentificationNumber = x }),
-        ISpecificCzechIdentificationNumberTests
+        ITestScenarios<FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberScenarios>
 {
     public class TestValidator : AbstractValidator<TestModel>
     {
@@ -26,4 +22,7 @@ public sealed class FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIden
                 .FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber();
         }
     }
+
+    public static FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberScenarios TestScenarios =>
+        new();
 }

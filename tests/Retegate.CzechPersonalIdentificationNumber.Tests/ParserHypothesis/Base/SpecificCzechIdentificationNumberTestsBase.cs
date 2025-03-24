@@ -1,12 +1,11 @@
+
 namespace Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.Base;
 
 public abstract class
-    SpecificCzechIdentificationNumberTestsBase<TPersonalIdentificationNumber, TSpecificCzechIdentificationNumberTests,
+    SpecificCzechIdentificationNumberTestsBase<TPersonalIdentificationNumber,
         TTestScenarios>
     where TPersonalIdentificationNumber : CzechPersonalIdentificationNumber,
     IParsable<TPersonalIdentificationNumber>
-    where TSpecificCzechIdentificationNumberTests :
-    ITestScenarios<TTestScenarios>
     where TTestScenarios : ISpecificCzechIdentificationNumberTests
 {
     [Theory]

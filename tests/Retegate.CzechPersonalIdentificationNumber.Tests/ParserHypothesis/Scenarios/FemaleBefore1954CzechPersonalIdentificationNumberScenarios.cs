@@ -5,6 +5,7 @@ namespace Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.Scen
 public sealed class FemaleBefore1954CzechPersonalIdentificationNumberScenarios : ISpecificCzechIdentificationNumberTests
 {
     public static Female1954AndLaterCzechPersonalIdentificationNumberScenarios TestScenarios => new();
+
     public static TheoryData<Base.PositiveTestScenario> ValidScenarios =>
     [
         new()

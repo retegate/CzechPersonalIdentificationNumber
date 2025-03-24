@@ -1,22 +1,16 @@
-using System.Diagnostics.CodeAnalysis;
-
 using FluentValidation;
 
-using Retegate.CzechPersonalIdentificationNumber;
-using Retegate.CzechPersonalIdentificationNumber.PartialParsing.Month;
-using Retegate.CzechPersonalIdentificationNumber.PartialParsing.Year;
-using Retegate.CzechPersonalIdentificationNumber.PartialValidators.Patterns;
-using Retegate.CzechPersonalIdentificationNumber.PartialValidators.VerificationNumbers;
+using Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.Scenarios;
 using Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.PartialValidationHypothesis;
 using Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.PartialValidationHypothesis.Base;
 
 namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.PartialValidationHypothesis;
 
-public sealed class FemaleBefore1954CzechPersonalIdentificationNumberValidationExtensionTests 
+public sealed class FemaleBefore1954CzechPersonalIdentificationNumberValidationExtensionTests()
     : ValidationTestsBase<FemaleBefore1954CzechPersonalIdentificationNumberValidationExtensionTests.TestValidator,
-        TestModel, FemaleBefore1954CzechPersonalIdentificationNumberValidationExtensionTests>(new TestValidator(),
-        x => new TestModel { PersonalIdentificationNumber = x }),
-    ISpecificCzechIdentificationNumberTests
+            TestModel, FemaleBefore1954CzechPersonalIdentificationNumberScenarios>(new TestValidator(),
+            x => new TestModel { PersonalIdentificationNumber = x }),
+        ITestScenarios<FemaleBefore1954CzechPersonalIdentificationNumberScenarios>
 {
     public class TestValidator : AbstractValidator<TestModel>
     {
@@ -26,4 +20,6 @@ public sealed class FemaleBefore1954CzechPersonalIdentificationNumberValidationE
                 .FemaleBefore1954CzechPersonalIdentificationNumber();
         }
     }
+
+    public static FemaleBefore1954CzechPersonalIdentificationNumberScenarios TestScenarios => new();
 }

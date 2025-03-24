@@ -7,7 +7,6 @@ namespace Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis;
 public sealed class FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberTests :
     SpecificCzechIdentificationNumberTestsBase<
         FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber,
-        FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberTests,
         FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberScenarios>,
     ITestScenarios<FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberScenarios>
 {

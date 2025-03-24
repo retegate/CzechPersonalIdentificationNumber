@@ -6,7 +6,6 @@ namespace Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis;
 
 public sealed class Male1954AndLaterCzechPersonalIdentificationNumberTests :
     SpecificCzechIdentificationNumberTestsBase<Male1954AndLaterCzechPersonalIdentificationNumber,
-        Male1954AndLaterCzechPersonalIdentificationNumberTests,
         Male1954AndLaterCzechPersonalIdentificationNumberScenarios>,
     ITestScenarios<Male1954AndLaterCzechPersonalIdentificationNumberScenarios>
 {

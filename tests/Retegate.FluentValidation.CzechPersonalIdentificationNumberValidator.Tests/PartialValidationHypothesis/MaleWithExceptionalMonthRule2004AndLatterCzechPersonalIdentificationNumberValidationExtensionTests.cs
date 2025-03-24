@@ -1,23 +1,17 @@
-using System.Diagnostics.CodeAnalysis;
-
 using FluentValidation;
 
-using Retegate.CzechPersonalIdentificationNumber;
-using Retegate.CzechPersonalIdentificationNumber.PartialParsing.Month;
-using Retegate.CzechPersonalIdentificationNumber.PartialParsing.Year;
-using Retegate.CzechPersonalIdentificationNumber.PartialValidators.Patterns;
-using Retegate.CzechPersonalIdentificationNumber.PartialValidators.VerificationNumbers;
+using Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.Scenarios;
 using Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.PartialValidationHypothesis;
 using Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.PartialValidationHypothesis.Base;
 
 namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.PartialValidationHypothesis;
 
-public sealed class MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberValidationExtensionTests
+public sealed class MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberValidationExtensionTests()
     : ValidationTestsBase<Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator,
-            TestModel, Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests>(
+            TestModel, MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberScenarios>(
             new Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator(),
             x => new TestModel { PersonalIdentificationNumber = x }),
-        ISpecificCzechIdentificationNumberTests
+        ITestScenarios<MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberScenarios>
 {
     public class TestValidator : AbstractValidator<TestModel>
     {
@@ -27,4 +21,7 @@ public sealed class MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdenti
                 .Female1954AndLaterCzechPersonalIdentificationNumber();
         }
     }
+
+    public static MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberScenarios TestScenarios =>
+        new();
 }

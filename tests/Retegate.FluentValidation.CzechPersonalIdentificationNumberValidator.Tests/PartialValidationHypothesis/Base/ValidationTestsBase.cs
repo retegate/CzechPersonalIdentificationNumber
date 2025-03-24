@@ -4,12 +4,12 @@ using Retegate.CzechPersonalIdentificationNumber.Tests.ParserHypothesis.Base;
 
 namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.PartialValidationHypothesis.Base;
 
-public abstract class ValidationTestsBase<TValidator, TModel, TSpecificCzechIdentificationNumberTests>(
+public abstract class ValidationTestsBase<TValidator, TModel, TTestScenarios>(
     TValidator validator,
     Func<string, TModel> modelCtor)
     where TValidator : AbstractValidator<TModel>
     where TModel : class
-    where TSpecificCzechIdentificationNumberTests : ISpecificCzechIdentificationNumberTests
+    where TTestScenarios : ISpecificCzechIdentificationNumberTests
 {
     [Fact]
     public void Validate_WithNull_ReturnsInvalidPatternFailure()
@@ -155,22 +155,16 @@ public abstract class ValidationTestsBase<TValidator, TModel, TSpecificCzechIden
             .ShouldBe(CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidFormatMessage);
     }
 
-    public static TheoryData<PositiveTestScenario>
-        ValidScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.ValidPersonalIdentificationNumbers;
+    public static TheoryData<PositiveTestScenario> ValidScenariosOverride => TTestScenarios.ValidScenarios;
 
-    public static TheoryData<string> InvalidPatternScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.InvalidPatternScenarios;
+    public static TheoryData<string> InvalidPatternScenariosOverride => TTestScenarios.InvalidPatternScenarios;
 
-    public static TheoryData<string>? InvalidMaleMonthScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.InvalidMaleMonthScenarios;
+    public static TheoryData<string>? InvalidMaleMonthScenariosOverride => TTestScenarios.InvalidMaleMonthScenarios;
 
-    public static TheoryData<string>? InvalidFemaleMonthScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.InvalidFemaleMonthScenarios;
+    public static TheoryData<string>? InvalidFemaleMonthScenariosOverride => TTestScenarios.InvalidFemaleMonthScenarios;
 
-    public static TheoryData<string> InvalidDateScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.InvalidDateScenarios;
+    public static TheoryData<string> InvalidDateScenariosOverride => TTestScenarios.InvalidDateScenarios;
 
     public static TheoryData<string> InvalidVerificationNumberScenariosOverride =>
-        TSpecificCzechIdentificationNumberTests.InvalidVerificationNumberScenarios;
+        TTestScenarios.InvalidVerificationNumberScenarios;
 }
