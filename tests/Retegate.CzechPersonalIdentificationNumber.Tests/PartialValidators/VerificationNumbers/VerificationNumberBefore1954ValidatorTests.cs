@@ -18,8 +18,8 @@ public class VerificationNumberBefore1954ValidatorTests
     }
 
     [Theory]
-    [InlineData("530101124")]
-    [InlineData("490101124")]
+    [InlineData("5301011223")]
+    [InlineData("49010112")]
     public void ValidateOrThrow_InvalidVerificationNumber_ThrowsFormatException(string personalIdentificationNumber)
     {
         // Arrange

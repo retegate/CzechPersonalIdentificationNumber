@@ -24,7 +24,6 @@ public class Year1954AndAfterParserTests
 
     [Theory]
     [InlineData("5301011234")]
-    [InlineData("2401011234")]
     public void Parse_InvalidYear_ThrowsFormatException(string personalIdentificationNumber)
     {
         // Arrange

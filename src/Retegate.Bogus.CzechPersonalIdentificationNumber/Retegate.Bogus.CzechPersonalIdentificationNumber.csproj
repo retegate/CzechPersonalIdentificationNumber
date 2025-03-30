@@ -11,8 +11,4 @@
       <ProjectReference Include="..\Retegate.CzechPersonalIdentificationNumber\Retegate.CzechPersonalIdentificationNumber.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="PartialGenerators\" />
-    </ItemGroup>
-
 </Project>

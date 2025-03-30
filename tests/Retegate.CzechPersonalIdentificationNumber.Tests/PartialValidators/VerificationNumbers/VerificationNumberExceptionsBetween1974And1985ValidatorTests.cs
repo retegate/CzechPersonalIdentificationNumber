@@ -5,8 +5,8 @@ namespace Retegate.CzechPersonalIdentificationNumber.Tests.PartialValidators.Ver
 public class VerificationNumberExceptionsBetween1974And1985ValidatorTests
 {
     [Theory]
-    [InlineData("7401011230")]
-    [InlineData("8501011230")]
+    [InlineData("7401014070")]
+    [InlineData("8501012750")]
     public void ValidateOrThrow_ValidVerificationNumber_DoesNotThrow(string personalIdentificationNumber)
     {
         // Arrange

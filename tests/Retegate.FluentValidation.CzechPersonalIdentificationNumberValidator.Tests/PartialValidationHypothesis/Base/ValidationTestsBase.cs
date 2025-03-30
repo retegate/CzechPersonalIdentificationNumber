@@ -47,7 +47,7 @@ public abstract class ValidationTestsBase<TValidator, TModel, TTestScenarios>(
 
     [Theory]
     [MemberData(nameof(InvalidPatternScenariosOverride))]
-    public void ValidatePattern_WithInvalidPattern_ReturnsInvalidPatternFailure(string personalIdentificationNumber)
+    public void Validate_WithInvalidPattern_ReturnsInvalidPatternFailure(string personalIdentificationNumber)
     {
         // Arrange
         var model = modelCtor(personalIdentificationNumber);
@@ -64,8 +64,8 @@ public abstract class ValidationTestsBase<TValidator, TModel, TTestScenarios>(
     }
 
     [Theory]
-    [MemberData(nameof(InvalidFemaleMonthScenariosOverride))]
-    public void ValidateYear_WithFemaleInvalidMonth_ReturnsInvalidYearFailure(string personalIdentificationNumber)
+    [MemberData(nameof(InvalidFemaleMonthScenariosOverride), DisableDiscoveryEnumeration = true)]
+    public void Validate_WithFemaleInvalidMonth_ReturnsInvalidYearFailure(string personalIdentificationNumber)
     {
         // Arrange
         var model = modelCtor(personalIdentificationNumber);
@@ -83,7 +83,7 @@ public abstract class ValidationTestsBase<TValidator, TModel, TTestScenarios>(
 
     [Theory]
     [MemberData(nameof(InvalidMaleMonthScenariosOverride), DisableDiscoveryEnumeration = true)]
-    public void ValidateYear_WithMaleInvalidMonth_ReturnsInvalidMaleMonthMessage(string personalIdentificationNumber)
+    public void Validate_WithMaleInvalidMonth_ReturnsInvalidMaleMonthMessage(string personalIdentificationNumber)
     {
         // Arrange
         var model = modelCtor(personalIdentificationNumber);
@@ -101,7 +101,7 @@ public abstract class ValidationTestsBase<TValidator, TModel, TTestScenarios>(
 
     [Theory]
     [MemberData(nameof(InvalidDateScenariosOverride))]
-    public void ValidateMonth_WithInvalidDay_ReturnsInvalidDayFailure(string personalIdentificationNumber)
+    public void Validate_WithInvalidDay_ReturnsInvalidDayFailure(string personalIdentificationNumber)
     {
         // Arrange
         var model = modelCtor(personalIdentificationNumber);
@@ -118,8 +118,8 @@ public abstract class ValidationTestsBase<TValidator, TModel, TTestScenarios>(
     }
 
     [Theory]
-    [MemberData(nameof(InvalidVerificationNumberScenariosOverride))]
-    public void ValidateMonth_WithInvalidModuloRule_ReturnsInvalidModuloFailure(string personalIdentificationNumber)
+    [MemberData(nameof(InvalidVerificationNumberScenariosOverride), DisableDiscoveryEnumeration = true)]
+    public void Validate_WithInvalidModuloRule_ReturnsInvalidModuloFailure(string personalIdentificationNumber)
     {
         // Arrange
         var model = modelCtor(personalIdentificationNumber);

@@ -3,7 +3,7 @@ using FluentValidation.Results;
 
 namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.PartialValidationHypothesis;
 
-internal static class MaleBefore1954CzechPersonalIdentificationNumberValidationExtension 
+public static class MaleBefore1954CzechPersonalIdentificationNumberValidationExtension 
 {
     /// <summary>
     /// Validation method of the czech personal identification number.

@@ -8,9 +8,9 @@ namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.T
 
 public sealed class
     FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberValidationExtensionTests()
-    : ValidationTestsBase<Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator,
+    : ValidationTestsBase<FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator,
             TestModel, FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberScenarios>(
-            new Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator(),
+            new TestValidator(),
             x => new TestModel { PersonalIdentificationNumber = x }),
         ITestScenarios<FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberScenarios>
 {

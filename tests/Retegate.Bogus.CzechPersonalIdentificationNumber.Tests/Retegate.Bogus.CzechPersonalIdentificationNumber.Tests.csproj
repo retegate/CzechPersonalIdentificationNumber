@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Retegate.Bogus.CzechPersonalIdentificationNumber\Retegate.Bogus.CzechPersonalIdentificationNumber.csproj" />
+      <ProjectReference Include="..\..\src\Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator\Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.csproj" />
     </ItemGroup>
 
 </Project>

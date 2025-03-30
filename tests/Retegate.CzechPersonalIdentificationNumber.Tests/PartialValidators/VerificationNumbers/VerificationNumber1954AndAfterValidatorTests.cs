@@ -5,8 +5,8 @@ namespace Retegate.CzechPersonalIdentificationNumber.Tests.PartialValidators.Ver
 public class VerificationNumber1954AndAfterValidatorTests
 {
     [Theory]
-    [InlineData("5401011234")]
-    [InlineData("9912311234")]
+    [InlineData("5401019833")]
+    [InlineData("9912310320")]
     public void ValidateOrThrow_ValidVerificationNumber_DoesNotThrow(string personalIdentificationNumber)
     {
         // Arrange

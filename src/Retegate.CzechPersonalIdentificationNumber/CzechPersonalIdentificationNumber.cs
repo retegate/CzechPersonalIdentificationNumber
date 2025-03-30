@@ -16,12 +16,24 @@ public class CzechPersonalIdentificationNumber : IParsable<CzechPersonalIdentifi
     internal const char ControlNumberOptionalSeparator = '/';
 
     internal const string NullInputFormatMessage = "The personal identification number cannot be null.";
-    internal static readonly string InvalidFormatMessage = $"The personal identification number is not in the correct format YYMMDD({ControlNumberOptionalSeparator})XXX(X).";
-    internal const string InvalidYearMessage = "The year part of the personal identification number is not in the correct format.";
-    internal const string InvalidMaleMonthMessage = "The month part of the male personal identification number is not in the correct format.";
-    internal const string InvalidFemaleMonthMessage = "The month part of the female personal identification number is not in the correct format.";
-    internal const string InvalidDayMessage = "The day part of the personal identification number is not in the correct format (Such date of birth not exist).";
-    internal const string InvalidVerificationNumberMessage = "The personal identification number is not in the correct format (The verification end number is not correct).";
+
+    internal static readonly string InvalidFormatMessage =
+        $"The personal identification number is not in the correct format YYMMDD({ControlNumberOptionalSeparator})XXX(X).";
+
+    internal const string InvalidYearMessage =
+        "The year part of the personal identification number is not in the correct format.";
+
+    internal const string InvalidMaleMonthMessage =
+        "The month part of the male personal identification number is not in the correct format.";
+
+    internal const string InvalidFemaleMonthMessage =
+        "The month part of the female personal identification number is not in the correct format.";
+
+    internal const string InvalidDayMessage =
+        "The day part of the personal identification number is not in the correct format (Such date of birth not exist).";
+
+    internal const string InvalidVerificationNumberMessage =
+        "The personal identification number is not in the correct format (The verification end number is not correct).";
 
     internal static readonly Dictionary<string, byte> InvalidFormatMessages = new()
     {
@@ -34,9 +46,12 @@ public class CzechPersonalIdentificationNumber : IParsable<CzechPersonalIdentifi
         { InvalidVerificationNumberMessage, 50 }
     };
 
-    internal CzechPersonalIdentificationNumber(string normalizedPersonalIdentificationNumber, DateOnly dateOfBirth, SexEnum sex)
+    internal CzechPersonalIdentificationNumber(string normalizedPersonalIdentificationNumber, DateOnly dateOfBirth,
+        SexEnum sex)
     {
-        NormalizedCzechNormalizedPersonalIdentificationNumber = normalizedPersonalIdentificationNumber;
+        NormalizedCzechNormalizedPersonalIdentificationNumber = normalizedPersonalIdentificationNumber
+            .Replace("/", string.Empty)
+            .Replace(" ", string.Empty);
         DateOfBirth = dateOfBirth;
         Sex = sex;
     }
@@ -44,9 +59,12 @@ public class CzechPersonalIdentificationNumber : IParsable<CzechPersonalIdentifi
     public string NormalizedCzechNormalizedPersonalIdentificationNumber { get; }
     public DateOnly DateOfBirth { get; }
     public SexEnum Sex { get; }
-    public string CzechNormalizedPersonalIdentificationNumberFormattedWithSlash => $"{NormalizedCzechNormalizedPersonalIdentificationNumber[..6]}{ControlNumberOptionalSeparator}{NormalizedCzechNormalizedPersonalIdentificationNumber[6..]}";
 
-    public static CzechPersonalIdentificationNumber Parse(string potentialPersonalIdentificationNumber, IFormatProvider? formatProvider = null)
+    public string CzechNormalizedPersonalIdentificationNumberFormattedWithSlash =>
+        $"{NormalizedCzechNormalizedPersonalIdentificationNumber[..6]}{ControlNumberOptionalSeparator}{NormalizedCzechNormalizedPersonalIdentificationNumber[6..]}";
+
+    public static CzechPersonalIdentificationNumber Parse(string potentialPersonalIdentificationNumber,
+        IFormatProvider? formatProvider = null)
     {
         var validationHypotheses = new List<Func<string, IFormatProvider?, CzechPersonalIdentificationNumber>>
         {
@@ -83,7 +101,8 @@ public class CzechPersonalIdentificationNumber : IParsable<CzechPersonalIdentifi
         throw new FormatException(bestErrorMessage);
     }
 
-    public static bool TryParse(string? potentialPersonalIdentificationNumber, IFormatProvider? formatProvider, [MaybeNullWhen(false)] out CzechPersonalIdentificationNumber result)
+    public static bool TryParse(string? potentialPersonalIdentificationNumber, IFormatProvider? formatProvider,
+        [MaybeNullWhen(false)] out CzechPersonalIdentificationNumber result)
     {
         try
         {

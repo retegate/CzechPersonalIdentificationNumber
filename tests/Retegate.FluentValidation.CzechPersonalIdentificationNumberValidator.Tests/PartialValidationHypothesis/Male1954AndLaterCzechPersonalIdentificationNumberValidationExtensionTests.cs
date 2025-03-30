@@ -7,9 +7,9 @@ using Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests
 namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.PartialValidationHypothesis;
 
 public sealed class Male1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests()
-    : ValidationTestsBase<Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator,
+    : ValidationTestsBase<Male1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator,
             TestModel, Male1954AndLaterCzechPersonalIdentificationNumberScenarios>(
-            new Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator(),
+            new TestValidator(),
             x => new TestModel { PersonalIdentificationNumber = x }),
         ITestScenarios<Male1954AndLaterCzechPersonalIdentificationNumberScenarios>
 {

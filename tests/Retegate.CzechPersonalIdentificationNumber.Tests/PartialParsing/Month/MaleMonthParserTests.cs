@@ -5,9 +5,9 @@ namespace Retegate.CzechPersonalIdentificationNumber.Tests.PartialParsing.Month;
 public class MaleMonthParserTests
 {
     [Theory]
-    [InlineData("0121011234", 1)]
-    [InlineData("0222011234", 2)]
-    [InlineData("1232011234", 12)]
+    [InlineData("0101011234", 1)]
+    [InlineData("0212011234", 12)]
+    [InlineData("1212011234", 12)]
     public void Parse_ValidMaleMonth_ReturnsCorrectMonthAndSex(string personalIdentificationNumber, byte expectedMonth)
     {
         // Arrange

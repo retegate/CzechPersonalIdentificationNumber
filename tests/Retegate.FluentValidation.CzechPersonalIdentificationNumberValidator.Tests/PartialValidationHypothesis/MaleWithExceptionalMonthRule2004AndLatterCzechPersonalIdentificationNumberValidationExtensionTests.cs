@@ -7,9 +7,9 @@ using Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests
 namespace Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.Tests.PartialValidationHypothesis;
 
 public sealed class MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberValidationExtensionTests()
-    : ValidationTestsBase<Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator,
+    : ValidationTestsBase<MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator,
             TestModel, MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberScenarios>(
-            new Female1954AndLaterCzechPersonalIdentificationNumberValidationExtensionTests.TestValidator(),
+            new TestValidator(),
             x => new TestModel { PersonalIdentificationNumber = x }),
         ITestScenarios<MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberScenarios>
 {
@@ -18,7 +18,7 @@ public sealed class MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdenti
         public TestValidator()
         {
             RuleFor(x => x.PersonalIdentificationNumber)
-                .Female1954AndLaterCzechPersonalIdentificationNumber();
+                .MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber();
         }
     }
 
