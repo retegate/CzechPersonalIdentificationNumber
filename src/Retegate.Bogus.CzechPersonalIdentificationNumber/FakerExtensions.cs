@@ -3,6 +3,7 @@
 using Bogus;
 
 using Retegate.CzechPersonalIdentificationNumber;
+using Retegate.CzechPersonalIdentificationNumber.ParserHypothesis;
 
 namespace Retegate.Bogus.CzechPersonalIdentificationNumber;
 
@@ -50,7 +51,8 @@ public static class FakerExtensions
                 dateOfBirth = DateOnly.FromDateTime(faker.Date.Between(bottomDateLimit, upperDateLimit));
                 personalIdentificationNumberFirstPart = $"{dateOfBirth:yy}{(dateOfBirth.Month):D2}{dateOfBirth:dd}";
                 return new Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber(
-                    FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954(dateOfBirth.Year,
+                    FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954<
+                        Male1954AndLaterCzechPersonalIdentificationNumber>(
                         personalIdentificationNumberFirstPart, delimiter), dateOfBirth, SexEnum.Male);
             case CzechPersonalIdentificationNumberKindEnum.Female1954AndLaterWithNoExceptionalRules:
                 bottomDateLimit = DateTime.Parse("1954-01-01T00:00:00Z");
@@ -59,7 +61,8 @@ public static class FakerExtensions
                 personalIdentificationNumberFirstPart =
                     $"{dateOfBirth:yy}{(dateOfBirth.Month + 50):D2}{dateOfBirth:dd}";
                 return new Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber(
-                    FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954(dateOfBirth.Year,
+                    FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954<
+                        Female1954AndLaterCzechPersonalIdentificationNumber>(
                         personalIdentificationNumberFirstPart, delimiter), dateOfBirth, SexEnum.Female);
 
             case CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleMaleInPopulationBoom1974Till1985:
@@ -68,7 +71,8 @@ public static class FakerExtensions
                 dateOfBirth = DateOnly.FromDateTime(faker.Date.Between(bottomDateLimit, upperDateLimit));
                 personalIdentificationNumberFirstPart = $"{dateOfBirth:yy}{(dateOfBirth.Month):D2}{dateOfBirth:dd}";
                 return new Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber(
-                    FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985(
+                    FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985<
+                        MaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber>(
                         personalIdentificationNumberFirstPart, delimiter),
                     dateOfBirth, SexEnum.Male);
             case CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleFemaleInPopulationBoom1974Till1985:
@@ -79,7 +83,8 @@ public static class FakerExtensions
                     $"{dateOfBirth:yy}{(dateOfBirth.Month + 50):D2}{dateOfBirth:dd}";
 
                 return new Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber(
-                    FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985(
+                    FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985<
+                        FemaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber>(
                         personalIdentificationNumberFirstPart, delimiter),
                     dateOfBirth, SexEnum.Female);
 
@@ -90,7 +95,8 @@ public static class FakerExtensions
                 personalIdentificationNumberFirstPart =
                     $"{dateOfBirth:yy}{(dateOfBirth.Month + 20):D2}{dateOfBirth:dd}";
                 return new Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber(
-                    FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954(dateOfBirth.Year,
+                    FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954<
+                        MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber>(
                         personalIdentificationNumberFirstPart, delimiter), dateOfBirth, SexEnum.Male);
             case CzechPersonalIdentificationNumberKindEnum.ExceptionalRuleFemaleInNewEraPopulationBoom2004:
                 bottomDateLimit = DateTime.Parse("1974-01-01T00:00:00Z");
@@ -99,7 +105,8 @@ public static class FakerExtensions
                 personalIdentificationNumberFirstPart =
                     $"{dateOfBirth:yy}{(dateOfBirth.Month + 20 + 50):D2}{dateOfBirth:dd}";
                 return new Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber(
-                    FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954(dateOfBirth.Year,
+                    FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954<
+                        FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber>(
                         personalIdentificationNumberFirstPart, delimiter), dateOfBirth, SexEnum.Female);
             default:
                 throw new ArgumentOutOfRangeException(
@@ -110,9 +117,19 @@ public static class FakerExtensions
     internal static CzechPersonalIdentificationNumberKindEnum ChooseFromScenarios(
         IEnumerable<ScenariosChoiceEnum> scenariosChoices)
     {
+        var scenariosChoiceEnums = scenariosChoices.ToList();
+        if (scenariosChoices == null || !scenariosChoiceEnums.Any())
+        {
+            throw new ArgumentNullException(nameof(scenariosChoices), "Scenarios choices cannot be null or empty.");
+        }
+
         var chosenScenariosRange = typeof(CzechPersonalIdentificationNumberKindEnum)
             .GetFields(BindingFlags.Public | BindingFlags.Static)
-            .Where(field => scenariosChoices.Contains(field.GetCustomAttribute<SexMappingAttribute>()!.ScenariosChoice))
+            .Where(field =>
+            {
+                var customAttributes = field.GetCustomAttribute<SexMappingAttribute>();
+                return customAttributes is not null && scenariosChoiceEnums.Contains(customAttributes!.ScenariosChoice);
+            })
             .Select(field => (CzechPersonalIdentificationNumberKindEnum)field.GetValue(null)!)
             .ToList();
 
@@ -128,12 +145,7 @@ public static class FakerExtensions
 
     internal static DateTime GetBottomDateTimeLimit()
     {
-        var now = DateTime.Now;
-        var bottomYearLimit =
-            Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.NineteenHundred + now.Year -
-            Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.TwoThousand - 1;
-        var bottomDateLimit = new DateTime(bottomYearLimit, now.Month, now.Day).AddDays(-1d);
-        return bottomDateLimit;
+        return DateTime.Now.AddYears(-100).AddDays(1d);
     }
 
     internal static DateTime GetUpperDateTimeLimit()
@@ -141,22 +153,20 @@ public static class FakerExtensions
         return DateTime.Now;
     }
 
-    internal static DateOnly GenerateDateOfBirth(Faker faker, DateTime bottomDateLimit, DateTime upperDateLimit)
-    {
-        return DateOnly.FromDateTime(faker.Date.Between(bottomDateLimit, upperDateLimit));
-    }
-
-    internal static string FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954(int year,
-        string personalIdentificationNumberFirstPart, string delimiter)
+    internal static string FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954<TParser>(
+        string personalIdentificationNumberFirstPart,
+        string delimiter)
+        where TParser : class, IParsable<TParser>
     {
         while (true)
         {
-            var initialControlNumberPivot = Random.Shared.Next(0, 9999 - 11);
+            var initialControlNumberPivot = Random.Shared.Next(0, 999 - 11);
             const int limitPivot = 10;
             int pivot;
             try
             {
-                pivot = ComputeControlNumberLastDigitPivot(limitPivot, personalIdentificationNumberFirstPart,
+                pivot = ComputeControlNumberLastDigitPivotForPersonsAfter1954<TParser>(limitPivot,
+                    personalIdentificationNumberFirstPart,
                     initialControlNumberPivot);
             }
             catch (InvalidOperationException)
@@ -166,53 +176,44 @@ public static class FakerExtensions
 
             if (pivot != limitPivot)
             {
-                return $"{personalIdentificationNumberFirstPart}{delimiter}{(initialControlNumberPivot + pivot):D4}";
+                return $"{personalIdentificationNumberFirstPart}{delimiter}{initialControlNumberPivot:D3}{pivot}";
             }
         }
     }
 
     internal static string
-        FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985(
+        FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985<TParser>(
             string personalIdentificationNumberFirstPart,
             string delimiter)
+        where TParser : class, IParsable<TParser>
     {
         while (true)
         {
-            var initialControlNumberPivot = Random.Shared.Next(0, 9999 - 11);
-            const int limitPivot = 10;
-            int pivot;
-            try
-            {
-                pivot = ComputeControlNumberLastDigitPivot(limitPivot, personalIdentificationNumberFirstPart,
-                    initialControlNumberPivot);
-            }
-            catch (InvalidOperationException)
+            var initialControlNumberPivot = Random.Shared.Next(0, 999 - 11);
+            var possiblePersonalIdentificationNumber =
+                $"{personalIdentificationNumberFirstPart}{(initialControlNumberPivot):D3}10";
+            if (ulong.Parse(possiblePersonalIdentificationNumber) % 11 != 0)
             {
                 continue;
             }
 
-            if (pivot != limitPivot)
-            {
-                continue;
-            }
-
-            var last3digits = initialControlNumberPivot.ToString("D4")[..^1];
-
-            var result = $"{personalIdentificationNumberFirstPart}{delimiter}{last3digits}0";
+            var result = $"{personalIdentificationNumberFirstPart}{delimiter}{initialControlNumberPivot}0";
             return result;
         }
     }
 
-    internal static int ComputeControlNumberLastDigitPivot(int limitPivot, string personalIdentificationNumberFirstPart,
+    internal static int ComputeControlNumberLastDigitPivotForPersonsAfter1954<TParser>(
+        int limitPivot,
+        string personalIdentificationNumberFirstPart,
         int initialControlNumberPivot)
+        where TParser : class, IParsable<TParser>
     {
         for (var i = 0; i <= limitPivot; i++)
         {
             var possiblePersonalIdentificationNumber =
-                $"{personalIdentificationNumberFirstPart}{(initialControlNumberPivot + i):D4}";
+                $"{personalIdentificationNumberFirstPart}{(initialControlNumberPivot):D3}{i}";
 
-            if (!Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.TryParse(
-                    possiblePersonalIdentificationNumber, null, out _))
+            if (long.Parse(possiblePersonalIdentificationNumber) % 11 != 0)
             {
                 continue;
             }

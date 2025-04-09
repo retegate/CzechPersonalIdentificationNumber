@@ -5,9 +5,11 @@ using FluentValidation;
 using Retegate.Bogus.CzechPersonalIdentificationNumber.PartialGenerators;
 using Retegate.FluentValidation.CzechPersonalIdentificationNumberValidator.PartialValidationHypothesis;
 
+using Xunit.Abstractions;
+
 namespace Retegate.Bogus.CzechPersonalIdentificationNumber.Tests;
 
-public class FakerExtensionsTests
+public class FakerExtensionsTests(ITestOutputHelper output)
 {
     private readonly Faker _faker = new();
 
@@ -183,7 +185,7 @@ public class FakerExtensionsTests
                     .MaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber
             ],
             ExpectedCzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum
-                .ExceptionalRuleFemaleInPopulationBoom1974Till1985,
+                .ExceptionalRuleMaleInPopulationBoom1974Till1985,
         };
         GenerateSpecifiedPersonalIdentificationNumber_WithNoExceptionalRules_ShouldMatchDedicatedValidator(scenario);
     }
@@ -203,7 +205,7 @@ public class FakerExtensionsTests
                     .FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber
             ],
             ExpectedCzechPersonalIdentificationNumberKind = CzechPersonalIdentificationNumberKindEnum
-                .ExceptionalRuleMaleInNewEraPopulationBoom2004,
+                .ExceptionalRuleFemaleInNewEraPopulationBoom2004,
         };
         GenerateSpecifiedPersonalIdentificationNumber_WithNoExceptionalRules_ShouldMatchDedicatedValidator(scenario);
     }
@@ -259,8 +261,8 @@ public class FakerExtensionsTests
             Generator = MaleFakerExtension.GenerateMaleCzechPersonalIdentificationNumber,
             ValidationRules =
             [
-                MaleBefore1954CzechPersonalIdentificationNumberValidationExtension
-                    .MaleBefore1954CzechPersonalIdentificationNumber,
+                Male1954AndLaterCzechPersonalIdentificationNumberValidationExtension
+                    .Male1954AndLaterCzechPersonalIdentificationNumber,
                 MaleBefore1954CzechPersonalIdentificationNumberValidationExtension
                     .MaleBefore1954CzechPersonalIdentificationNumber,
                 MaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumberValidationExtension
@@ -336,6 +338,9 @@ public class FakerExtensionsTests
             });
             validationResults2.Add(result2.IsValid);
         }
+        
+        output.WriteLine(value1.NormalizedCzechNormalizedPersonalIdentificationNumber);
+        output.WriteLine(value2.NormalizedCzechNormalizedPersonalIdentificationNumber);
 
         validationResults1.Where(vr => vr).ShouldHaveSingleItem();
         validationResults2.Where(vr => vr).ShouldHaveSingleItem();
