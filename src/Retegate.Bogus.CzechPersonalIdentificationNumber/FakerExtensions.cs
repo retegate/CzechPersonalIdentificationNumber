@@ -191,13 +191,13 @@ public static class FakerExtensions
         {
             var initialControlNumberPivot = Random.Shared.Next(0, 999 - 11);
             var possiblePersonalIdentificationNumber =
-                $"{personalIdentificationNumberFirstPart}{(initialControlNumberPivot):D3}10";
+                $"{personalIdentificationNumberFirstPart}{initialControlNumberPivot:D3}10";
             if (ulong.Parse(possiblePersonalIdentificationNumber) % 11 != 0)
             {
                 continue;
             }
 
-            var result = $"{personalIdentificationNumberFirstPart}{delimiter}{initialControlNumberPivot}0";
+            var result = $"{personalIdentificationNumberFirstPart}{delimiter}{initialControlNumberPivot:D3}0";
             return result;
         }
     }

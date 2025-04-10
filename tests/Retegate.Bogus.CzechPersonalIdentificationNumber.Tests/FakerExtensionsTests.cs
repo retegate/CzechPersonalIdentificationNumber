@@ -293,8 +293,8 @@ public class FakerExtensionsTests(ITestOutputHelper output)
                     .FemaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber,
                 FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumberValidationExtension
                     .FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber,
-                MaleBefore1954CzechPersonalIdentificationNumberValidationExtension
-                    .MaleBefore1954CzechPersonalIdentificationNumber,
+                Male1954AndLaterCzechPersonalIdentificationNumberValidationExtension
+                    .Male1954AndLaterCzechPersonalIdentificationNumber,
                 MaleBefore1954CzechPersonalIdentificationNumberValidationExtension
                     .MaleBefore1954CzechPersonalIdentificationNumber,
                 MaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumberValidationExtension

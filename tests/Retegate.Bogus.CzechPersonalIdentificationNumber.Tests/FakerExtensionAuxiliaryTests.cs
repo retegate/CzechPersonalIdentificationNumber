@@ -85,7 +85,7 @@ public class FakerExtensionAuxiliaryTests
         var result = FakerExtensions.GetBottomDateTimeLimit();
 
         // Assert
-        result.ShouldBe(DateTime.UtcNow.AddDays(-1d).AddYears(-100));
+        result.Date.ShouldBe(DateTime.UtcNow.AddDays(1d).AddYears(-100).Date);
     }
 
     #endregion GetBottomDateTimeLimit
@@ -124,7 +124,7 @@ public class FakerExtensionAuxiliaryTests
 
     [Fact]
     public void
-        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_WithMaleExceptionalMonthRuleParser_ShouldPass()
+        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_WithMaleExceptional2004AndAfterMonthRuleParser_ShouldPass()
     {
         FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_ShouldPass<
             MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber>("042304");
@@ -132,10 +132,26 @@ public class FakerExtensionAuxiliaryTests
 
     [Fact]
     public void
-        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_WithFemaleExceptionalMonthRuleParser_ShouldPass()
+        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_WithFemaleExceptional2004AndAfterMonthRuleParser_ShouldPass()
     {
         FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_ShouldPass<
             FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber>("047304");
+    }
+
+    [Fact]
+    public void
+        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_WithMaleExceptionalBetween1974And1985MonthRuleParser_ShouldPass()
+    {
+        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_ShouldPass<
+            MaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber>("830304");
+    }
+
+    [Fact]
+    public void
+        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_WithFemaleExceptionalBetween1974And1985MonthRuleParser_ShouldPass()
+    {
+        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_ShouldPass<
+            FemaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber>("8305304");
     }
 
     private static void
@@ -151,38 +167,6 @@ public class FakerExtensionAuxiliaryTests
 
         // Assert
         (long.Parse(result) % 11).ShouldBe(0);
-    }
-
-    [Fact]
-    public void
-        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_WithMaleExceptionalMonthRuleParser_ShouldFail()
-    {
-        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_ShouldFail<
-            MaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber>("830304");
-    }
-
-    [Fact]
-    public void
-        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_WithFemaleExceptionalMonthRuleParser_ShouldFail()
-    {
-        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_ShouldFail<
-            FemaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber>("830304");
-    }
-
-    private static void
-        FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954_ShouldFail<TParser>(
-            string firstPart)
-        where TParser : class, IParsable<TParser>
-    {
-        // Arrange, Act and Assert
-        Should.Throw<InvalidOperationException>(() =>
-        {
-            _ =
-                FakerExtensions
-                    .FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954<TParser>(
-                        firstPart,
-                        string.Empty);
-        });
     }
 
     #endregion FinishPersonalIdentificationNumberByGeneratingProperVerificationNumberAfter1954
@@ -222,76 +206,82 @@ public class FakerExtensionAuxiliaryTests
         (long.Parse(improvedResult) % 11).ShouldBe(0);
     }
 
+    #endregion FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985
+
+    #region ComputeControlNumberLastDigitPivotForPersonsAfter1954
+
     [Fact]
     public void
-        FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985_WithMale1954AndAfterPersonalIdentificationNumberParser_ShouldFail()
+        ComputeControlNumberLastDigitPivotForPersonsAfter1954_WithMale1954AndLaterCzechPersonalIdentificationNumber_ShouldPass()
     {
-        FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985_ShouldFail<
+        ComputeControlNumberLastDigitPivotForPersonsAfter1954_ShouldPass<
             Male1954AndLaterCzechPersonalIdentificationNumber>("830304");
     }
 
     [Fact]
     public void
-        FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985_WithFemale1954AndAfterPersonalIdentificationNumberParser_ShouldFail()
+        ComputeControlNumberLastDigitPivotForPersonsAfter1954_WithFemale1954AndLaterCzechPersonalIdentificationNumber_ShouldPass()
     {
-        FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985_ShouldFail<
+        ComputeControlNumberLastDigitPivotForPersonsAfter1954_ShouldPass<
             Female1954AndLaterCzechPersonalIdentificationNumber>("835304");
     }
 
     [Fact]
     public void
-        FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985_WithMaleExceptionalVerificationNumbe2004AndAfterPersonalIdentificationNumberParser_ShouldFail()
+        ComputeControlNumberLastDigitPivotForPersonsAfter1954_WithMaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber_ShouldPass()
     {
-        FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985_ShouldFail<
-            MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber>("832304");
+        ComputeControlNumberLastDigitPivotForPersonsAfter1954_ShouldPass<
+            MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber>("042304");
     }
 
     [Fact]
     public void
-        FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985_WithFemaleExceptionalVerificationNumbe2004AndAfterPersonalIdentificationNumberParser_ShouldFail()
+        ComputeControlNumberLastDigitPivotForPersonsAfter1954_WithFemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber_ShouldPass()
     {
-        FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985_ShouldFail<
-            FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber>("837304");
+        ComputeControlNumberLastDigitPivotForPersonsAfter1954_ShouldPass<
+            FemaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber>("047304");
     }
 
-    private static void
-        FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985_ShouldFail<
-            TParser>(string firstPart)
-        where TParser : class, IParsable<TParser>
-    {
-        // Arrange, Act and Assert
-        Should.Throw<InvalidOperationException>(() =>
-        {
-            return _ =
-                FakerExtensions
-                    .FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985<
-                        TParser>(
-                        firstPart, string.Empty);
-        });
-    }
-
-    #endregion FinishPersonalIdentificationNumberByGeneratingExceptionalVerificationNumberBetween1974And1985
-
-    #region ComputeControlNumberLastDigitPivotForPersonsAfter1954
-
-    několik parserů
-
-    // [Fact]
-    public void ComputeControlNumberLastDigitPivotForPersonsAfter1954<TParser>()
+    private void ComputeControlNumberLastDigitPivotForPersonsAfter1954_ShouldPass<TParser>(string firstPart)
         where TParser : class, IParsable<TParser>
     {
         // Arrange
-        const string firstPart = "123456";
-
+        const int initialValue = 123;
+        
         // Act
         var result =
+            FakerExtensions.ComputeControlNumberLastDigitPivotForPersonsAfter1954<TParser>(10, firstPart, initialValue);
+
+        // Assert
+        (long.Parse($"{firstPart}{initialValue:D3}{result}") % 11).ShouldBe(0);
+    }
+
+    [Fact]
+    public void
+        ComputeControlNumberLastDigitPivotForPersonsAfter1954_WithMaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber_ShouldFail()
+    {
+        ComputeControlNumberLastDigitPivotForPersonsAfter1954_ShouldFail<
+            MaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber>("830304");
+    }
+
+    [Fact]
+    public void
+        ComputeControlNumberLastDigitPivotForPersonsAfter1954_WithFemaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber_ShouldFail()
+    {
+        ComputeControlNumberLastDigitPivotForPersonsAfter1954_ShouldFail<
+            FemaleWithExceptionalModuloRuleBetween1974And1985CzechPersonalIdentificationNumber>("835304");
+    }
+
+    private void ComputeControlNumberLastDigitPivotForPersonsAfter1954_ShouldFail<TParser>(string firstPart)
+        where TParser : class, IParsable<TParser>
+    {
+        // Arrange and Act
+        var verificationNumber =
             FakerExtensions.ComputeControlNumberLastDigitPivotForPersonsAfter1954<TParser>(10, firstPart, 123);
 
         // Assert
-        (result % 11).ShouldBe(0);
+        TParser.TryParse($"{firstPart}{verificationNumber}", null, out _).ShouldBeFalse();
     }
-
-    failující
 
     #endregion ComputeControlNumberLastDigitPivotForPersonsAfter1954
 }

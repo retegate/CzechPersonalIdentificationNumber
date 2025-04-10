@@ -8,7 +8,7 @@ public enum CzechPersonalIdentificationNumberKindEnum : byte
     ArbitraryPerson = 0,
     ArbitraryMale = 1,
     ArbitraryFemale = 2,
-    
+
     [SexMapping(ScenariosChoiceEnum.Male)] MaleBefore1954 = 3,
 
     [SexMapping(ScenariosChoiceEnum.Female)]
@@ -18,7 +18,7 @@ public enum CzechPersonalIdentificationNumberKindEnum : byte
     [SexMapping(ScenariosChoiceEnum.Female)]
     Female1954AndLaterWithNoExceptionalRules = 6,
     [SexMapping(ScenariosChoiceEnum.Male)] ExceptionalRuleMaleInPopulationBoom1974Till1985 = 7,
-    [SexMapping(ScenariosChoiceEnum.Male)] ExceptionalRuleFemaleInPopulationBoom1974Till1985 = 8,
+    [SexMapping(ScenariosChoiceEnum.Female)] ExceptionalRuleFemaleInPopulationBoom1974Till1985 = 8,
     [SexMapping(ScenariosChoiceEnum.Male)] ExceptionalRuleMaleInNewEraPopulationBoom2004 = 9,
 
     [SexMapping(ScenariosChoiceEnum.Female)]
