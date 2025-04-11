@@ -13,6 +13,19 @@ public sealed class MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdenti
     {
     }
 
+    ///  <summary>
+    ///  Parse the string to <see cref="MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber"/>.
+    ///  </summary>
+    ///  <param name="potentialPersonalIdentificationNumber"></param>
+    ///  <returns></returns>
+    ///  <exception cref="FormatException"></exception>
+    /// <para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.NullInputFormatMessage"/></para>
+    /// <para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidFormatMessage"/></para>
+    /// <para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidYearMessage"/></para>
+    /// <para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidMaleMonthMessage"/></para>
+    /// <para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidFemaleMonthMessage"/></para>
+    /// <para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidDayMessage"/></para>
+    /// <para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidVerificationNumberMessage"/></para>
     public static new MaleWithExceptionalMonthRule2004AndLatterCzechPersonalIdentificationNumber Parse(string potentialPersonalIdentificationNumber, IFormatProvider? _ = null)
     {
         return ParsingHelper.Parse(potentialPersonalIdentificationNumber, ValidationScenario, Ctor);

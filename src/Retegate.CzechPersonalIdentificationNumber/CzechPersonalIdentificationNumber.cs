@@ -63,6 +63,20 @@ public class CzechPersonalIdentificationNumber : IParsable<CzechPersonalIdentifi
     public string CzechNormalizedPersonalIdentificationNumberFormattedWithSlash =>
         $"{NormalizedCzechNormalizedPersonalIdentificationNumber[..6]}{ControlNumberOptionalSeparator}{NormalizedCzechNormalizedPersonalIdentificationNumber[6..]}";
 
+    /// <summary>
+    /// Parse the string to <see cref="CzechPersonalIdentificationNumber"/>.
+    /// </summary>
+    /// <param name="potentialPersonalIdentificationNumber"></param>
+    /// <param name="formatProvider"></param>
+    /// <returns></returns>
+    /// <exception cref="FormatException"></exception>
+    ///<para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.NullInputFormatMessage"/></para>
+    ///<para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidFormatMessage"/></para>
+    ///<para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidYearMessage"/></para>
+    ///<para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidMaleMonthMessage"/></para>
+    ///<para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidFemaleMonthMessage"/></para>
+    ///<para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidDayMessage"/></para>
+    ///<para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidVerificationNumberMessage"/></para>
     public static CzechPersonalIdentificationNumber Parse(string potentialPersonalIdentificationNumber,
         IFormatProvider? formatProvider = null)
     {
