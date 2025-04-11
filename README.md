@@ -200,3 +200,12 @@ feel free to buy me a coffee — it'll help me create more helpful open-source u
 If you need a donation agreement, feel free to contact me at retegate@retegate.com.  
 
 Thank you for all your support!
+
+# Licence
+Copyright (c) Retegate
+Permission is hereby granted, free of charge...
+
+This project uses:
+- [.NET 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) - MIT License
+- [Bogus](https://github.com/bchavez/Bogus) - MIT License
+- [FluentValidation](https://github.com/FluentValidation/FluentValidation) - MIT License
