@@ -1,14 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <PackageId>Retegate.Bogus.CzechPersonalIdentificationNumber</PackageId>
+        <Product>Retegate.Bogus.CzechPersonalIdentificationNumber</Product>
+        <Description>Simple extension for Czech Personal Identification Number generation in various scenarios (different rules for different eras).</Description>
+        <PackageTags>Bogus;Czech Personal Identification Number;Rodné číslo;Generator;Testing</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Bogus" />
+        <PackageReference Include="Bogus"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Retegate.CzechPersonalIdentificationNumber\Retegate.CzechPersonalIdentificationNumber.csproj" />
+        <ProjectReference Include="..\Retegate.CzechPersonalIdentificationNumber\Retegate.CzechPersonalIdentificationNumber.csproj"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath=""/>
     </ItemGroup>
 
 </Project>

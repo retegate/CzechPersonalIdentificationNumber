@@ -1,7 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        
+        <PackageId>Retegate.CzechPersonalIdentificationNumber</PackageId>
+        <Product>Retegate.CzechPersonalIdentificationNumber</Product>
+        <Description>Simple extension for Czech Personal Identification Number parsing tool from string.</Description>
+        <PackageTags>Parser;Czech Personal Identification Number;Rodné číslo</PackageTags>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
 
 </Project>

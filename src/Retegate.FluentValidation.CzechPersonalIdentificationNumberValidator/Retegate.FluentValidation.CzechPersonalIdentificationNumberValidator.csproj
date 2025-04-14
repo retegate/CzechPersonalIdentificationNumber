@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <PackageId>Retegate.FluentValidation.CzechPersonalIdentificationNumber</PackageId>
+        <Product>Retegate.FluentValidation.CzechPersonalIdentificationNumber</Product>
+        <Description>Simple extension for Czech Personal Identification Number Fluent Validation.</Description>
+        <PackageTags>Fluent Validation;Czech Personal Identification Number;Rodné číslo</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
@@ -9,6 +13,10 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Retegate.CzechPersonalIdentificationNumber\Retegate.CzechPersonalIdentificationNumber.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath=""/>
     </ItemGroup>
 
 </Project>
