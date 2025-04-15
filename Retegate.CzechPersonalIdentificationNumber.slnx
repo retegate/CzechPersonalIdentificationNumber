@@ -2,7 +2,6 @@
   <Folder Name="/SolutionItems/">
     <File Path=".editorconfig" />
     <File Path=".gitattributes" />
-    <File Path=".gitignore" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Build.targets" />
     <File Path="Directory.Packages.props" />
@@ -10,6 +9,7 @@
     <File Path="README.md" />
     <File Path="Retegate.CzechPersonalIdentificationNumber.slnx" />
     <File Path="Donation.png" />
+    <File Path=".gitignore" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Retegate.Bogus.CzechPersonalIdentificationNumber/Retegate.Bogus.CzechPersonalIdentificationNumber.csproj" />
