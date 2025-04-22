@@ -183,10 +183,6 @@ If available, the SHA-256 hashes (preferably without slashes or spaces) of these
 parser and validator —  
 **not the generator**, as the original values would be unknown and thus unverifiable.
 
-# License
-
-This project is completely free to use under the MIT License.
-
 # Donation
 
 The issue of working with **Czech Personal Identification Numbers (rodná čísla)** has come up on several of my past
