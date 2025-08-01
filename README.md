@@ -168,6 +168,12 @@ var personalNumber = faker.GenerateCzechPersonalIdentificationNumber(CzechPerson
                 .ExceptionalRuleFemaleInPopulationBoom1974Till1985);
 ```
 
+# Changes
+
+## 2024-06-10
+- Validation: Error messages in FluentValidation and the parser are now available as constants in CzechPersonalIdentification class.
+- Benefit: Enables easy use with `IStringLocalizer` (e.g., for localizing error messages) while e.g. creating custom validators in FluentValidation.
+
 # Contribution
 
 If you find this extension useful and run into any issues, feel free to report them or contact me at

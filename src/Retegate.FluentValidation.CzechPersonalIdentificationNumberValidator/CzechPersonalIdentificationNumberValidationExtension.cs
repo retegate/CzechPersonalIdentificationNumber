@@ -24,14 +24,17 @@ public static class CzechPersonalIdentificationNumberValidationExtension
     ///<para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidDayMessage"/></para>
     ///<para><see cref="Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.InvalidVerificationNumberMessage"/></para>
     /// </returns>
-    public static IRuleBuilderOptions<T, string> CzechPersonalIdentificationNumber<T>(this IRuleBuilder<T, string> ruleBuilder)
+    public static IRuleBuilderOptions<T, string> CzechPersonalIdentificationNumber<T>(
+        this IRuleBuilder<T, string> ruleBuilder)
+        where T : class
     {
         var result = ruleBuilder
             .Custom((personalIdentificationNumber, context) =>
             {
                 try
                 {
-                    _ = Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.Parse(personalIdentificationNumber);
+                    _ = Retegate.CzechPersonalIdentificationNumber.CzechPersonalIdentificationNumber.Parse(
+                        personalIdentificationNumber);
                 }
                 catch (FormatException e)
                 {

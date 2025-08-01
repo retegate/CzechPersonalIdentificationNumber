@@ -15,24 +15,24 @@ public class CzechPersonalIdentificationNumber : IParsable<CzechPersonalIdentifi
     internal const byte VerificationNumberModuloDivider = 11;
     internal const char ControlNumberOptionalSeparator = '/';
 
-    internal const string NullInputFormatMessage = "The personal identification number cannot be null.";
+    public const string NullInputFormatMessage = "The personal identification number cannot be null.";
 
-    internal static readonly string InvalidFormatMessage =
+    public static readonly string InvalidFormatMessage =
         $"The personal identification number is not in the correct format YYMMDD({ControlNumberOptionalSeparator})XXX(X).";
 
-    internal const string InvalidYearMessage =
+    public const string InvalidYearMessage =
         "The year part of the personal identification number is not in the correct format.";
 
-    internal const string InvalidMaleMonthMessage =
+    public const string InvalidMaleMonthMessage =
         "The month part of the male personal identification number is not in the correct format.";
 
-    internal const string InvalidFemaleMonthMessage =
+    public const string InvalidFemaleMonthMessage =
         "The month part of the female personal identification number is not in the correct format.";
 
-    internal const string InvalidDayMessage =
+    public const string InvalidDayMessage =
         "The day part of the personal identification number is not in the correct format (Such date of birth not exist).";
 
-    internal const string InvalidVerificationNumberMessage =
+    public const string InvalidVerificationNumberMessage =
         "The personal identification number is not in the correct format (The verification end number is not correct).";
 
     internal static readonly Dictionary<string, byte> InvalidFormatMessages = new()
