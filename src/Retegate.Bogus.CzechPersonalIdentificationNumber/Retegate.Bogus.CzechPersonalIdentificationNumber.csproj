@@ -5,6 +5,7 @@
         <Product>Retegate.Bogus.CzechPersonalIdentificationNumber</Product>
         <Description>Simple extension for Czech Personal Identification Number generation in various scenarios (different rules for different eras).</Description>
         <PackageTags>Bogus;Czech Personal Identification Number;Rodné číslo;Generator;Testing</PackageTags>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,7 +15,7 @@
     <ItemGroup>
         <ProjectReference Include="..\Retegate.CzechPersonalIdentificationNumber\Retegate.CzechPersonalIdentificationNumber.csproj"/>
     </ItemGroup>
-    
+
     <ItemGroup>
         <None Include="..\..\README.md" Pack="true" PackagePath=""/>
     </ItemGroup>

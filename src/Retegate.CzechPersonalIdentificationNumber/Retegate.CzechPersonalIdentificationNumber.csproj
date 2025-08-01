@@ -5,6 +5,7 @@
         <Product>Retegate.CzechPersonalIdentificationNumber</Product>
         <Description>Simple extension for Czech Personal Identification Number parsing tool from string.</Description>
         <PackageTags>Parser;Czech Personal Identification Number;Rodné číslo</PackageTags>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
     <ItemGroup>

@@ -5,6 +5,7 @@
         <Product>Retegate.FluentValidation.CzechPersonalIdentificationNumber</Product>
         <Description>Simple extension for Czech Personal Identification Number Fluent Validation.</Description>
         <PackageTags>Fluent Validation;Czech Personal Identification Number;Rodné číslo</PackageTags>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
     <ItemGroup>
